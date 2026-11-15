@@ -17,6 +17,7 @@ import {
 import { Achievement, AchievementCategory } from '../types/portfolio';
 import { initialAchievements } from '../data/achievementsData';
 import { FadeUp } from './animations/ScrollReveal';
+import { resolveAssetUrl } from '../utils/assetPath';
 
 const AWARD_DIVISION_BADGE_CLASS =
   'text-[11px] font-mono text-[#C5FA59] bg-[#C5FA59]/10 px-2 py-0.5 rounded border border-[#C5FA59]/20 font-semibold';
@@ -38,8 +39,14 @@ export const AchievementsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [activeModalItem, setActiveModalItem] = useState<Achievement | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [failedProofImages, setFailedProofImages] = useState<Record<string, boolean>>({});
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  const markProofImageFailed = (src: string) => {
+    if (!src) return;
+    setFailedProofImages((prev) => (prev[src] ? prev : { ...prev, [src]: true }));
+  };
 
   // Sorting: 1) Category priority (수상 -> 공모전 -> 학업/장학 -> 교육 수료 -> 대외활동), 2) Explicit order, 3) highlight / year
   const sortedAchievements = [...initialAchievements].sort((a, b) => {
@@ -366,12 +373,18 @@ export const AchievementsSection: React.FC = () => {
                         aria-label={`${item.title} 증빙 서류 확대 보기`}
                       >
                         <div className="relative w-8 h-8 rounded overflow-hidden bg-black/40 border border-[#2B2F38] shrink-0">
-                          <img
-                            src={item.proofs![0].src}
-                            alt=""
-                            loading="lazy"
-                            className="w-full h-full object-cover group-hover/btn:scale-105 transition-transform duration-300"
-                          />
+                          {(() => {
+                            const thumbSrc = resolveAssetUrl(item.proofs![0].src);
+                            return !failedProofImages[thumbSrc] ? (
+                              <img
+                                src={thumbSrc}
+                                alt=""
+                                loading="lazy"
+                                className="w-full h-full object-cover group-hover/btn:scale-105 transition-transform duration-300"
+                                onError={() => markProofImageFailed(thumbSrc)}
+                              />
+                            ) : null;
+                          })()}
                           <div className="absolute inset-0 bg-black/20 group-hover/btn:bg-transparent transition-colors flex items-center justify-center">
                             <ZoomIn className="w-3.5 h-3.5 text-[#C5FA59]" />
                           </div>
@@ -463,18 +476,29 @@ export const AchievementsSection: React.FC = () => {
 
               {/* Certificate Image Container */}
               <div className="w-full max-w-2xl mx-auto flex flex-col items-center pt-1 pb-2">
-                <img
-                  src={activeModalItem.proofs[currentImageIndex].src}
-                  alt={
-                    activeModalItem.proofs[currentImageIndex].alt ||
-                    `${activeModalItem.title} 증빙 서류 ${currentImageIndex + 1}`
-                  }
-                  className="w-full max-w-full h-auto max-h-[66vh] rounded-lg border border-[#2B2F38] shadow-2xl block mx-auto"
-                  style={{
-                    objectFit: 'contain',
-                    objectPosition: 'top center',
-                  }}
-                />
+                {(() => {
+                  const modalSrc = resolveAssetUrl(activeModalItem.proofs[currentImageIndex].src);
+                  return failedProofImages[modalSrc] ? (
+                    <div className="w-full aspect-[4/3] rounded-lg border border-[#2B2F38] bg-[#14161B] flex flex-col items-center justify-center gap-2 text-[#8E939E] p-6 text-center">
+                      <ShieldCheck className="w-7 h-7 text-[#3E434E]" />
+                      <span className="text-xs font-mono">증빙 서류 이미지를 불러올 수 없습니다</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={modalSrc}
+                      alt={
+                        activeModalItem.proofs[currentImageIndex].alt ||
+                        `${activeModalItem.title} 증빙 서류 ${currentImageIndex + 1}`
+                      }
+                      className="w-full max-w-full h-auto max-h-[66vh] rounded-lg border border-[#2B2F38] shadow-2xl block mx-auto"
+                      style={{
+                        objectFit: 'contain',
+                        objectPosition: 'top center',
+                      }}
+                      onError={() => markProofImageFailed(modalSrc)}
+                    />
+                  );
+                })()}
                 {activeModalItem.proofs[currentImageIndex].title && (
                   <p className="text-center text-xs font-mono text-[#A7AAB0] mt-3 px-2 break-keep">
                     {activeModalItem.proofs[currentImageIndex].title}

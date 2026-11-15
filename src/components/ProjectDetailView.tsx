@@ -16,6 +16,7 @@ import { Project, VisualGalleryCategory } from '../types/portfolio';
 import { FadeUp } from './animations/ScrollReveal';
 import { ProjectVideoPlayer } from './ProjectVideoPlayer';
 import { ProjectContributionCard } from './ProjectContributionCard';
+import { resolveAssetUrl } from '../utils/assetPath';
 
 interface Props {
   project: Project;
@@ -87,11 +88,19 @@ export const ProjectDetailView: React.FC<Props> = ({
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   // Expanded Categories state for OFF THE RECORD "더 보기" toggle
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
+  // Failed image tracking for graceful fallback UI if an asset fails to load
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+
+  const markImageFailed = (key: string) => {
+    if (!key) return;
+    setFailedImages((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
+  };
 
   useEffect(() => {
     // Reset selected / expanded category state when switching projects
     setSelectedCategoryId(null);
     setExpandedCategories({});
+    setFailedImages({});
   }, [project.id]);
 
   const toggleCategoryExpand = (categoryId: string) => {
@@ -474,12 +483,25 @@ export const ProjectDetailView: React.FC<Props> = ({
                           >
                             {/* 썸네일 컨테이너 (다크 배경 + 원본 비율 유지 object-contain) */}
                             <div className="relative w-full aspect-[4/3] bg-[#0E1015] overflow-hidden flex items-center justify-center p-3">
-                              <img
-                                src={img.src}
-                                alt={img.alt || `${section.title} ${imgIdx + 1}`}
-                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                                loading={isGifSource(img.src) ? 'eager' : 'lazy'}
-                              />
+                              {(() => {
+                                const resolvedSrc = resolveAssetUrl(img.src);
+                                return failedImages[resolvedSrc] ? (
+                                  <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-3">
+                                    <ImageIcon className="w-6 h-6 text-[#3E434E]" />
+                                    <span className="text-[11px] font-mono break-keep">
+                                      {img.alt || section.title}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <img
+                                    src={resolvedSrc}
+                                    alt={img.alt || `${section.title} ${imgIdx + 1}`}
+                                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                    loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
+                                    onError={() => markImageFailed(resolvedSrc)}
+                                  />
+                                );
+                              })()}
 
                               {/* 은은한 앰비언트 호버 효과 */}
                               <div className="absolute inset-0 bg-[#C5FA59]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -517,12 +539,25 @@ export const ProjectDetailView: React.FC<Props> = ({
                           >
                             {/* 썸네일 컨테이너 (다크 배경 + 원본 비율 유지 object-contain) */}
                             <div className="relative w-full aspect-[4/3] bg-[#0E1015] overflow-hidden flex items-center justify-center p-3">
-                              <img
-                                src={img.src}
-                                alt={img.alt || `${section.title} ${imgIdx + 1}`}
-                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                                loading={isGifSource(img.src) ? 'eager' : 'lazy'}
-                              />
+                              {(() => {
+                                const resolvedSrc = resolveAssetUrl(img.src);
+                                return failedImages[resolvedSrc] ? (
+                                  <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-3">
+                                    <ImageIcon className="w-6 h-6 text-[#3E434E]" />
+                                    <span className="text-[11px] font-mono break-keep">
+                                      {img.alt || section.title}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <img
+                                    src={resolvedSrc}
+                                    alt={img.alt || `${section.title} ${imgIdx + 1}`}
+                                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                    loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
+                                    onError={() => markImageFailed(resolvedSrc)}
+                                  />
+                                );
+                              })()}
 
                               {/* 은은한 앰비언트 호버 효과 */}
                               <div className="absolute inset-0 bg-[#C5FA59]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -640,12 +675,25 @@ export const ProjectDetailView: React.FC<Props> = ({
                         }`}
                       >
                         <div className={getFrameClasses(imgIdx, subId, cardVariant)}>
-                          <img
-                            src={img.src}
-                            alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
-                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                            loading={isGifSource(img.src) ? 'eager' : 'lazy'}
-                          />
+                          {(() => {
+                            const resolvedSrc = resolveAssetUrl(img.src);
+                            return failedImages[resolvedSrc] ? (
+                              <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-3">
+                                <ImageIcon className="w-6 h-6 text-[#3E434E]" />
+                                <span className="text-[11px] font-mono break-keep">
+                                  {img.title || img.alt || cat.title}
+                                </span>
+                              </div>
+                            ) : (
+                              <img
+                                src={resolvedSrc}
+                                alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
+                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                                loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
+                                onError={() => markImageFailed(resolvedSrc)}
+                              />
+                            );
+                          })()}
                           <div className="absolute inset-0 bg-[#C5FA59]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                           <div className="absolute bottom-3 right-3 z-10 p-1.5 rounded-lg bg-[#101114]/85 text-[#C5FA59] border border-[#2D313B] opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-1 group-hover:translate-y-0 shadow-md">
                             <Maximize2 className="w-4 h-4" />
@@ -965,12 +1013,25 @@ export const ProjectDetailView: React.FC<Props> = ({
                               : 'aspect-[4/3] p-2.5 sm:p-3'
                           } bg-[#0E1015] overflow-hidden flex items-center justify-center`}
                         >
-                          <img
-                            src={img.src}
-                            alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
-                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                            loading={isGifSource(img.src) ? 'eager' : 'lazy'}
-                          />
+                          {(() => {
+                            const resolvedSrc = resolveAssetUrl(img.src);
+                            return failedImages[resolvedSrc] ? (
+                              <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-3">
+                                <ImageIcon className="w-6 h-6 text-[#3E434E]" />
+                                <span className="text-[11px] font-mono break-keep">
+                                  {img.title || img.alt || cat.title}
+                                </span>
+                              </div>
+                            ) : (
+                              <img
+                                src={resolvedSrc}
+                                alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
+                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                                loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
+                                onError={() => markImageFailed(resolvedSrc)}
+                              />
+                            );
+                          })()}
                           <div className="absolute inset-0 bg-[#C5FA59]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                           <div className="absolute bottom-3 right-3 z-10 p-1.5 rounded-lg bg-[#101114]/85 text-[#C5FA59] border border-[#2D313B] opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-1 group-hover:translate-y-0 shadow-md">
                             <Maximize2 className="w-4 h-4" />
@@ -1214,12 +1275,25 @@ export const ProjectDetailView: React.FC<Props> = ({
                             isFullWidthCard ? 'p-2 sm:p-3' : 'p-1.5 sm:p-2'
                           } bg-[#0E1015] overflow-hidden flex items-center justify-center`}
                         >
-                          <img
-                            src={img.src}
-                            alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
-                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                            loading="lazy"
-                          />
+                          {(() => {
+                            const resolvedSrc = resolveAssetUrl(img.src);
+                            return failedImages[resolvedSrc] ? (
+                              <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-3">
+                                <ImageIcon className="w-6 h-6 text-[#3E434E]" />
+                                <span className="text-[11px] font-mono break-keep">
+                                  {img.title || img.alt || cat.title}
+                                </span>
+                              </div>
+                            ) : (
+                              <img
+                                src={resolvedSrc}
+                                alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
+                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                                loading="lazy"
+                                onError={() => markImageFailed(resolvedSrc)}
+                              />
+                            );
+                          })()}
                           <div className="absolute inset-0 bg-[#C5FA59]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                           <div className="absolute bottom-3 right-3 z-10 p-1.5 rounded-lg bg-[#101114]/85 text-[#C5FA59] border border-[#2D313B] opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-1 group-hover:translate-y-0 shadow-md">
                             <Maximize2 className="w-4 h-4" />
@@ -1446,12 +1520,25 @@ export const ProjectDetailView: React.FC<Props> = ({
                           >
                             {/* 썸네일 컨테이너: 원본 비율 왜곡 방지 (object-contain) & 부드러운 호버 확대 */}
                             <div className="relative w-full aspect-[4/3] bg-[#0E1015] overflow-hidden flex items-center justify-center p-3">
-                              <img
-                                src={img.src}
-                                alt={img.alt || img.title || `${activeCategory.title} ${imgIdx + 1}`}
-                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                                loading={isGifSource(img.src) ? 'eager' : 'lazy'}
-                              />
+                              {(() => {
+                                const resolvedSrc = resolveAssetUrl(img.src);
+                                return failedImages[resolvedSrc] ? (
+                                  <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-3">
+                                    <ImageIcon className="w-6 h-6 text-[#3E434E]" />
+                                    <span className="text-[11px] font-mono break-keep">
+                                      {img.title || img.alt || activeCategory.title}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <img
+                                    src={resolvedSrc}
+                                    alt={img.alt || img.title || `${activeCategory.title} ${imgIdx + 1}`}
+                                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                    loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
+                                    onError={() => markImageFailed(resolvedSrc)}
+                                  />
+                                );
+                              })()}
                               <div className="absolute inset-0 bg-[#C5FA59]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                               <div className="absolute bottom-2.5 right-2.5 z-10 p-1.5 rounded-lg bg-[#101114]/85 text-[#C5FA59] border border-[#2D313B] opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-1 group-hover:translate-y-0 shadow-md">
                                 <Maximize2 className="w-3.5 h-3.5" />
@@ -1559,18 +1646,31 @@ export const ProjectDetailView: React.FC<Props> = ({
                       <div className="pt-2 space-y-3">
                         {ach.posterThumbnail && (
                           <a
-                            href={ach.posterPdfUrl}
+                            href={resolveAssetUrl(ach.posterPdfUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group/poster block relative rounded-lg overflow-hidden border border-[#282C36] hover:border-[#C5FA59]/70 bg-[#0E1015] aspect-[3/4] max-h-60 flex items-center justify-center transition-all duration-300 shadow-inner cursor-pointer"
                             title="학술대회 포스터 새 탭에서 열기"
                           >
-                            <img
-                              src={ach.posterThumbnail}
-                              alt={`${ach.researchTitle || ach.title} 포스터 미리보기`}
-                              className="w-full h-full object-contain transition-transform duration-300 group-hover/poster:scale-[1.02]"
-                              loading="lazy"
-                            />
+                            {(() => {
+                              const resolvedPosterThumb = resolveAssetUrl(ach.posterThumbnail);
+                              return failedImages[resolvedPosterThumb] ? (
+                                <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-4">
+                                  <FileText className="w-6 h-6 text-[#3E434E]" />
+                                  <span className="text-[11px] font-mono break-keep">
+                                    학술대회 포스터 PDF 열기
+                                  </span>
+                                </div>
+                              ) : (
+                                <img
+                                  src={resolvedPosterThumb}
+                                  alt={`${ach.researchTitle || ach.title} 포스터 미리보기`}
+                                  className="w-full h-full object-contain transition-transform duration-300 group-hover/poster:scale-[1.02]"
+                                  loading="lazy"
+                                  onError={() => markImageFailed(resolvedPosterThumb)}
+                                />
+                              );
+                            })()}
                             <div className="absolute inset-0 bg-[#0E1015]/40 opacity-0 group-hover/poster:opacity-100 transition-opacity flex items-center justify-center">
                               <span className="px-3 py-1.5 rounded-md bg-[#17191E]/95 text-[#C5FA59] border border-[#C5FA59]/50 text-xs font-mono font-medium flex items-center gap-1.5 shadow-lg">
                                 <Maximize2 className="w-3.5 h-3.5" />
@@ -1580,7 +1680,7 @@ export const ProjectDetailView: React.FC<Props> = ({
                           </a>
                         )}
                         <a
-                          href={ach.posterPdfUrl}
+                          href={resolveAssetUrl(ach.posterPdfUrl)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#20242D] hover:bg-[#C5FA59] text-[#C5FA59] hover:text-[#0E1015] text-xs font-mono font-semibold border border-[#2D313B] hover:border-[#C5FA59] transition-all duration-200 shadow-sm"
@@ -1695,16 +1795,27 @@ export const ProjectDetailView: React.FC<Props> = ({
               onClick={(e) => e.stopPropagation()}
               className="max-h-full max-w-5xl flex flex-col items-center justify-center px-4"
             >
-              <img
-                key={currentImage.src}
-                src={currentImage.src}
-                alt={currentImage.alt || currentImage.title || activeCategory?.title}
-                className={`${
-                  currentImage.id === 'gtb-intro-cutscene'
-                    ? 'w-[min(85vw,56rem)] h-auto max-h-[75vh]'
-                    : 'max-h-[75vh] max-w-full'
-                } object-contain rounded-lg shadow-2xl border border-[#282C36]`}
-              />
+              {(() => {
+                const resolvedCurrentSrc = resolveAssetUrl(currentImage.src);
+                return failedImages[resolvedCurrentSrc] ? (
+                  <div className="w-[min(80vw,36rem)] aspect-[16/9] rounded-lg border border-[#282C36] bg-[#14161C] flex flex-col items-center justify-center gap-2 text-[#8E939E] p-6 text-center">
+                    <ImageIcon className="w-8 h-8 text-[#3E434E]" />
+                    <span className="text-xs font-mono">이미지를 불러올 수 없습니다</span>
+                  </div>
+                ) : (
+                  <img
+                    key={resolvedCurrentSrc}
+                    src={resolvedCurrentSrc}
+                    alt={currentImage.alt || currentImage.title || activeCategory?.title}
+                    className={`${
+                      currentImage.id === 'gtb-intro-cutscene'
+                        ? 'w-[min(85vw,56rem)] h-auto max-h-[75vh]'
+                        : 'max-h-[75vh] max-w-full'
+                    } object-contain rounded-lg shadow-2xl border border-[#282C36]`}
+                    onError={() => markImageFailed(resolvedCurrentSrc)}
+                  />
+                );
+              })()}
               {(currentImage.title || currentImage.caption || currentImage.description) && (
                 <div className="mt-3 text-center space-y-1">
                   {currentImage.title && (

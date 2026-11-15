@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { resolveAssetUrl } from '../../utils/assetPath';
 
 interface Props {
   className?: string;
@@ -6,30 +7,40 @@ interface Props {
 }
 
 export const TalesUnwrittenArt: React.FC<Props> = ({ className = '', variant = 'card' }) => {
+  const [currentEmotion, setCurrentEmotion] = useState<'CALM' | 'TENSE' | 'EMPATHY' | 'DOUBT'>('CALM');
+
   // WORKS 카드 대표 썸네일: 사용자가 업로드한 실제 게임 스크린샷 이미지 표시
   if (variant === 'card') {
+    const primaryThumb = resolveAssetUrl('/images/tales-unwritten-thumbnail.png');
+    const fallbackThumb = resolveAssetUrl('/images/projects/tales-unwritten/tales-unwritten-thumbnail.png');
     return (
       <div
         className={`relative w-full h-full overflow-hidden select-none bg-[#090A0D] flex items-center justify-center ${className}`}
       >
         {/* 왜곡 없이 16:10 카드 비율을 꽉 채우는 앰비언트 블러 배경 */}
         <img
-          src="/images/tales-unwritten-thumbnail.png"
+          src={primaryThumb}
           alt=""
           aria-hidden="true"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
           className="absolute inset-0 w-full h-full object-cover blur-md opacity-35 scale-105 pointer-events-none"
         />
 
         {/* 주요 피사체와 지시문 텍스트가 잘리지 않는 선명한 전경 썸네일 */}
         <img
-          src="/images/tales-unwritten-thumbnail.png"
+          src={primaryThumb}
           alt="TALES UNWRITTEN 메인 썸네일"
           className="relative z-10 w-full h-full object-contain"
           onError={(e) => {
             const target = e.currentTarget;
-            if (!target.src.includes('projects/tales-unwritten')) {
-              target.src = '/images/projects/tales-unwritten/tales-unwritten-thumbnail.png';
+            if (target.dataset.fallbackApplied) {
+              target.style.opacity = '0';
+              return;
             }
+            target.dataset.fallbackApplied = 'true';
+            target.src = fallbackThumb;
           }}
           loading="lazy"
         />
@@ -39,8 +50,6 @@ export const TalesUnwrittenArt: React.FC<Props> = ({ className = '', variant = '
       </div>
     );
   }
-
-  const [currentEmotion, setCurrentEmotion] = useState<'CALM' | 'TENSE' | 'EMPATHY' | 'DOUBT'>('CALM');
 
   const emotionData = {
     CALM: {

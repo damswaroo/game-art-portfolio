@@ -10,10 +10,16 @@ interface Props {
 export const ContactSection: React.FC<Props> = ({ onScrollToTop }) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(designerProfile.contact.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopyEmail = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(designerProfile.contact.email);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    } catch {
+      // ignore clipboard permission errors
+    }
   };
 
   return (

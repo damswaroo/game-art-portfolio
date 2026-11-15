@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { FadeUp } from './animations/ScrollReveal';
+import { resolveAssetUrl } from '../utils/assetPath';
 
 interface Props {
   onExploreClick: () => void;
@@ -19,7 +20,7 @@ export const HeroSection: React.FC<Props> = ({ onExploreClick, onOpenFeaturedPro
       {/* Layer 2: Ambient Unsplash Background Image (Philipp Hubert - uqWRXjbDplg) at 60% opacity */}
       <div
         className="absolute inset-0 pointer-events-none bg-cover bg-no-repeat bg-[center_right] md:bg-[85%_50%] opacity-60 brightness-125 contrast-120 saturate-160 transition-opacity duration-700"
-        style={{ backgroundImage: `url('/images/hero-bg.jpg')` }}
+        style={{ backgroundImage: `url('${resolveAssetUrl('/images/hero-bg.jpg')}')` }}
         aria-hidden="true"
       />
 

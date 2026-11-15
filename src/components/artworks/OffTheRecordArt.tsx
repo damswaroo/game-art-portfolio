@@ -1,4 +1,5 @@
 import React from 'react';
+import { resolveAssetUrl } from '../../utils/assetPath';
 
 interface Props {
   className?: string;
@@ -8,22 +9,29 @@ interface Props {
 export const OffTheRecordArt: React.FC<Props> = ({ className = '', variant = 'card' }) => {
   // WORKS 카드 대표 썸네일: 사용자가 업로드한 실제 타이틀 화면 이미지 표시
   if (variant === 'card') {
+    const thumbSrc = resolveAssetUrl('/images/오프더레코드_썸네일2.png');
     return (
       <div
         className={`relative w-full h-full overflow-hidden select-none bg-[#090A0D] flex items-center justify-center ${className}`}
       >
         {/* 왜곡 없이 16:10 카드 비율을 꽉 채우는 앰비언트 블러 배경 */}
         <img
-          src="/images/오프더레코드_썸네일2.png"
+          src={thumbSrc}
           alt=""
           aria-hidden="true"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
           className="absolute inset-0 w-full h-full object-cover blur-md opacity-35 scale-105 pointer-events-none"
         />
 
         {/* 핵심 화면(캐릭터 및 타이틀 아트)이 잘리거나 왜곡되지 않도록 선명한 전경 썸네일 표시 */}
         <img
-          src="/images/오프더레코드_썸네일2.png"
+          src={thumbSrc}
           alt="OFF THE RECORD 메인 썸네일"
+          onError={(e) => {
+            e.currentTarget.style.opacity = '0';
+          }}
           className="relative z-10 w-full h-full object-contain"
           loading="lazy"
         />

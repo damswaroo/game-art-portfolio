@@ -1,4 +1,5 @@
 import { Achievement } from '../types/portfolio';
+import { resolveAssetUrl } from '../utils/assetPath';
 
 /**
  * ACHIEVEMENTS DATA (권유담 포트폴리오 공식 성과 및 활동 기록)
@@ -23,7 +24,7 @@ export const initialAchievements: Achievement[] = [
       '프로젝트 ‘OFF THE RECORD’로 대학부 본선 진출, 전문가 멘토링 3회 및 본선 발표를 거쳐 우수상 수상',
     proofs: [
       {
-        src: '/certificates/인디유_우수상1.png',
+        src: resolveAssetUrl('/certificates/인디유_우수상1.png'),
         title:
           '2026년 충청권 인디게임 공모전 인디유(indie·U) 본선심사 결과 공고 (대학부 우수상 3USTUDIO 선정)',
         date: '2026',
@@ -46,7 +47,7 @@ export const initialAchievements: Achievement[] = [
     description: '제3회 SW융합대학 학술제 게임개발 경진대회에서 우수상 수상.',
     proofs: [
       {
-        src: '/certificates/게임개발경진대회_우수상.jpg',
+        src: resolveAssetUrl('/certificates/게임개발경진대회_우수상.jpg'),
         title: '제3회 SW융합대학 학술제 게임개발 경진대회 우수상 상장 (2인 팀 수상)',
         date: '2026.11.11',
         alt: '순천향대학교 SW융합대학 제3회 학술제 게임개발 경진대회 우수상 상장',
@@ -69,7 +70,7 @@ export const initialAchievements: Achievement[] = [
     articleUrl: 'https://ccon.kr/bbs/board.php?bo_table=news&wr_id=366',
     proofs: [
       {
-        src: '/certificates/gamejam-award-2026.png',
+        src: resolveAssetUrl('/certificates/gamejam-award-2026.png'),
         title: '충남콘텐츠진흥원 2026 미래 게임잼 최우수상 상장 (삼유스튜디오 팀)',
         date: '2026.09.13',
         alt: '충남글로벌게임센터 2026 미래 게임잼 최우수상 상장',
@@ -91,7 +92,7 @@ export const initialAchievements: Achievement[] = [
       '감정 인식 기반 인터랙티브 게임 연구로 대학생 논문경진대회 동상 수상',
     proofs: [
       {
-        src: '/certificates/research-award-2025.png',
+        src: resolveAssetUrl('/certificates/research-award-2025.png'),
         title: '2025 한국디지털콘텐츠학회 대학생 논문경진대회 동상 상장',
         date: '2025.07.05',
         alt: '한국디지털콘텐츠학회 대학생 논문경진대회 동상 상장 (이유진, 권유담, 오제호)',
@@ -137,19 +138,19 @@ export const initialAchievements: Achievement[] = [
     ],
     proofs: [
       {
-        src: '/certificates/deans-list-2025-1.png',
+        src: resolveAssetUrl('/certificates/deans-list-2025-1.png'),
         title: "2025학년도 1학기 SW융합대학 Dean's List 성적우수학생 인증서",
         date: '2025.08.28',
         alt: "2025학년도 1학기 SW융합대학 Dean's List 성적우수학생 인증서 (권유담)",
       },
       {
-        src: '/certificates/deans-list-2025-2.png',
+        src: resolveAssetUrl('/certificates/deans-list-2025-2.png'),
         title: "2025학년도 2학기 SW융합대학 Dean's List 성적우수학생 인증서",
         date: '2026.01.08',
         alt: "2025학년도 2학기 SW융합대학 Dean's List 성적우수학생 인증서 (권유담)",
       },
       {
-        src: '/certificates/deans-list-2026-1.png',
+        src: resolveAssetUrl('/certificates/deans-list-2026-1.png'),
         title: "2026학년도 1학기 SW융합대학 Dean's List 성적우수학생 인증서",
         date: '2026.07.20',
         alt: "2026학년도 1학기 SW융합대학 Dean's List 성적우수학생 인증서 (권유담)",
@@ -169,7 +170,7 @@ export const initialAchievements: Achievement[] = [
       '학업 성적, 봉사활동 및 학교생활의 성실도를 종합적으로 평가하여 단과대별 여학생 1명에게 수여하는 전액 장학금 수혜',
     proofs: [
       {
-        src: '/certificates/scholarship-2026.png',
+        src: resolveAssetUrl('/certificates/scholarship-2026.png'),
         title: '2026학년도 순천향대학교 김정옥 장학증서',
         date: '2026.04.02',
         alt: '순천향대학교 2026학년도 김정옥 장학증서 (권유담)',
@@ -191,7 +192,7 @@ export const initialAchievements: Achievement[] = [
       "충남글로벌게임센터 운영 '2026 미래 창작자 성장 과정'(2026년 4월~10월)에 삼유스튜디오 팀으로 참여하여 교육 과정 수료",
     proofs: [
       {
-        src: '/certificates/미래창작자_수료증.jpg',
+        src: resolveAssetUrl('/certificates/미래창작자_수료증.jpg'),
         title: '2026 미래 창작자 성장 과정 수료증 (삼유스튜디오)',
         date: '2026.10.23',
         alt: '충남콘텐츠진흥원 2026 미래 창작자 성장 과정 수료증 (삼유스튜디오)',
@@ -210,7 +211,7 @@ export const initialAchievements: Achievement[] = [
     description: '인간과 인터페이스의 관계를 다루는 디자인 실습 교육 이수',
     proofs: [
       {
-        src: '/certificates/training-certificate-2026.png',
+        src: resolveAssetUrl('/certificates/training-certificate-2026.png'),
         title: '서울대학교 교육 프로그램 이수증 (휴먼인터페이스 디자인 실습)',
         date: '2026.07.10',
         alt: '서울대학교 대학연대 지역인재양성 사업단 교육 프로그램 이수증',
@@ -235,13 +236,13 @@ export const initialAchievements: Achievement[] = [
     ],
     proofs: [
       {
-        src: '/certificates/student-council-2025.png',
+        src: resolveAssetUrl('/certificates/student-council-2025.png'),
         title: '2025년도 순천향대학교 대의원 인준서 (총대의원회)',
         date: '2025.04.30',
         alt: '2025년도 순천향대학교 대의원 인준서',
       },
       {
-        src: '/certificates/student-council-2026.png',
+        src: resolveAssetUrl('/certificates/student-council-2026.png'),
         title: '2026년도 순천향대학교 대의원 인준서 (총대의원회)',
         date: '2026.04.30',
         alt: '2026년도 순천향대학교 대의원 인준서',

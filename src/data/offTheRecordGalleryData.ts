@@ -1,4 +1,5 @@
 import { VisualGalleryCategory } from '../types/portfolio';
+import { resolveAssetUrl } from '../utils/assetPath';
 
 /**
  * ============================================================================
@@ -41,22 +42,22 @@ export const offTheRecordVisualGallery: VisualGalleryCategory[] = [
     images: [
       {
         id: 'kv-1',
-        src: '/images/off-the-record/오프더레코드_B2_2.png',
+        src: resolveAssetUrl('/images/off-the-record/오프더레코드_B2_2.png'),
         alt: 'OFF THE RECORD 대표 키 비주얼 포스터 1',
       },
       {
         id: 'kv-2',
-        src: '/images/off-the-record/오프더레코드_1.png',
+        src: resolveAssetUrl('/images/off-the-record/오프더레코드_1.png'),
         alt: 'OFF THE RECORD 키 비주얼 세로 포스터 2',
       },
       {
         id: 'kv-3',
-        src: '/images/off-the-record/오프더레코드_메인아트1.png',
+        src: resolveAssetUrl('/images/off-the-record/오프더레코드_메인아트1.png'),
         alt: 'OFF THE RECORD 메인 아트 1',
       },
       {
         id: 'kv-4',
-        src: '/images/off-the-record/오프더레코드_메인아트2.png',
+        src: resolveAssetUrl('/images/off-the-record/오프더레코드_메인아트2.png'),
         alt: 'OFF THE RECORD 메인 아트 2',
       },
     ],
@@ -69,28 +70,28 @@ export const offTheRecordVisualGallery: VisualGalleryCategory[] = [
     images: [
       {
         id: 'char-1',
-        src: '/images/off-the-record/오프더레코드_메인아트3.png',
+        src: resolveAssetUrl('/images/off-the-record/오프더레코드_메인아트3.png'),
         alt: 'OFF THE RECORD 캐릭터 비주얼 1 (메인아트 3)',
       },
       {
         id: 'char-2',
-        src: '/images/off-the-record/오프더레코드_메인아트4.png',
+        src: resolveAssetUrl('/images/off-the-record/오프더레코드_메인아트4.png'),
         alt: 'OFF THE RECORD 캐릭터 비주얼 2 (메인아트 4)',
       },
       {
         id: 'char-3',
-        src: '/images/off-the-record/오프더레코드_메인아트5.png',
+        src: resolveAssetUrl('/images/off-the-record/오프더레코드_메인아트5.png'),
         alt: 'OFF THE RECORD 캐릭터 비주얼 3 (메인아트 5)',
       },
       {
         id: 'char-4',
-        src: '/images/off-the-record/캐릭터시트_아리아.png',
+        src: resolveAssetUrl('/images/off-the-record/캐릭터시트_아리아.png'),
         title: '아리아 캐릭터 시트',
         alt: 'OFF THE RECORD 아리아 캐릭터 시트',
       },
       {
         id: 'char-5',
-        src: '/images/off-the-record/캐릭터시트_태오.png',
+        src: resolveAssetUrl('/images/off-the-record/캐릭터시트_태오.png'),
         title: '태오 캐릭터 시트',
         alt: 'OFF THE RECORD 태오 캐릭터 시트',
       },
@@ -110,12 +111,12 @@ export const offTheRecordVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'env-1',
-            src: '/images/off-the-record/오프더레코드_배경아트1.png',
+            src: resolveAssetUrl('/images/off-the-record/오프더레코드_배경아트1.png'),
             alt: 'OFF THE RECORD 우주 잔해 및 지구 궤도 배경 아트 1',
           },
           {
             id: 'env-2',
-            src: '/images/off-the-record/오프더레코드_배경이미지2.png',
+            src: resolveAssetUrl('/images/off-the-record/오프더레코드_배경이미지2.png'),
             alt: 'OFF THE RECORD 지구 궤도 및 위성 잔해 배경 아트 2',
           },
         ],
@@ -127,17 +128,17 @@ export const offTheRecordVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'env-3',
-            src: '/images/off-the-record/우주쓰레기.png',
+            src: resolveAssetUrl('/images/off-the-record/우주쓰레기.png'),
             alt: 'OFF THE RECORD 환경 오브젝트 — 우주쓰레기',
           },
           {
             id: 'env-4',
-            src: '/images/off-the-record/운석.png',
+            src: resolveAssetUrl('/images/off-the-record/운석.png'),
             alt: 'OFF THE RECORD 환경 오브젝트 — 운석',
           },
           {
             id: 'env-5',
-            src: '/images/off-the-record/인공위성.png',
+            src: resolveAssetUrl('/images/off-the-record/인공위성.png'),
             alt: 'OFF THE RECORD 환경 오브젝트 — 인공위성',
           },
         ],
@@ -149,49 +150,49 @@ export const offTheRecordVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'ship-stage-0',
-            src: '/images/off-the-record/0단계_우주선.png',
+            src: resolveAssetUrl('/images/off-the-record/0단계_우주선.png'),
             title: '0단계 함선',
             alt: 'OFF THE RECORD 플레이어 우주선 0단계',
           },
           {
             id: 'ship-stage-1',
-            src: '/images/off-the-record/1단계_우주선.png',
+            src: resolveAssetUrl('/images/off-the-record/1단계_우주선.png'),
             title: '1단계 함선',
             alt: 'OFF THE RECORD 플레이어 우주선 1단계',
           },
           {
             id: 'ship-stage-2',
-            src: '/images/off-the-record/2단계_우주선.png',
+            src: resolveAssetUrl('/images/off-the-record/2단계_우주선.png'),
             title: '2단계 함선',
             alt: 'OFF THE RECORD 플레이어 우주선 2단계',
           },
           {
             id: 'ship-part-barrier',
-            src: '/images/off-the-record/베리어.png',
+            src: resolveAssetUrl('/images/off-the-record/베리어.png'),
             title: '베리어',
             alt: 'OFF THE RECORD 우주선 부품 — 베리어',
           },
           {
             id: 'ship-part-booster',
-            src: '/images/off-the-record/부스터.png',
+            src: resolveAssetUrl('/images/off-the-record/부스터.png'),
             title: '부스터',
             alt: 'OFF THE RECORD 우주선 부품 — 부스터',
           },
           {
             id: 'ship-part-emp',
-            src: '/images/off-the-record/EMP.png',
+            src: resolveAssetUrl('/images/off-the-record/EMP.png'),
             title: 'EMP',
             alt: 'OFF THE RECORD 우주선 부품 — EMP',
           },
           {
             id: 'ship-part-cargo',
-            src: '/images/off-the-record/택배상자.png',
+            src: resolveAssetUrl('/images/off-the-record/택배상자.png'),
             title: '택배상자',
             alt: 'OFF THE RECORD 우주선 부품 — 택배상자',
           },
           {
             id: 'ship-part-turret',
-            src: '/images/off-the-record/요격포탑.png',
+            src: resolveAssetUrl('/images/off-the-record/요격포탑.png'),
             title: '요격포탑',
             alt: 'OFF THE RECORD 우주선 부품 — 요격포탑',
           },
@@ -204,31 +205,31 @@ export const offTheRecordVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'enemy-main-boss',
-            src: '/images/off-the-record/메인보스.png',
+            src: resolveAssetUrl('/images/off-the-record/메인보스.png'),
             title: '메인 보스',
             alt: 'OFF THE RECORD 적 유닛 — 메인 보스',
           },
           {
             id: 'enemy-midboss-1-carrier',
-            src: '/images/off-the-record/중간보스1드론모함.png',
+            src: resolveAssetUrl('/images/off-the-record/중간보스1드론모함.png'),
             title: '중간보스 1-1 드론모함',
             alt: 'OFF THE RECORD 적 유닛 — 중간보스 1-1 드론모함',
           },
           {
             id: 'enemy-midboss-1-2-mini',
-            src: '/images/off-the-record/중간보스1-2미니드론.png',
+            src: resolveAssetUrl('/images/off-the-record/중간보스1-2미니드론.png'),
             title: '중간보스 1-2 미니드론',
             alt: 'OFF THE RECORD 적 유닛 — 중간보스 1-2 미니드론',
           },
           {
             id: 'enemy-midboss-2-ghost',
-            src: '/images/off-the-record/중간보스2유령드론.png',
+            src: resolveAssetUrl('/images/off-the-record/중간보스2유령드론.png'),
             title: '중간보스 2 유령드론',
             alt: 'OFF THE RECORD 적 유닛 — 중간보스 2 유령드론',
           },
           {
             id: 'enemy-midboss-3-vacuum',
-            src: '/images/off-the-record/중간보스3청소기드론.png',
+            src: resolveAssetUrl('/images/off-the-record/중간보스3청소기드론.png'),
             title: '중간보스 3 청소기드론',
             alt: 'OFF THE RECORD 적 유닛 — 중간보스 3 청소기드론',
           },
@@ -244,37 +245,37 @@ export const offTheRecordVisualGallery: VisualGalleryCategory[] = [
     images: [
       {
         id: 'graphics-start-screen',
-        src: '/images/off-the-record/시작화면.png',
+        src: resolveAssetUrl('/images/off-the-record/시작화면.png'),
         title: '시작화면',
         alt: 'OFF THE RECORD UI & Game Graphics — 시작화면',
       },
       {
         id: 'graphics-loading-screen',
-        src: '/images/로딩창.png',
+        src: resolveAssetUrl('/images/로딩창.png'),
         title: '로딩창',
         alt: 'OFF THE RECORD UI & Game Graphics — 로딩창',
       },
       {
         id: 'graphics-item-icons',
-        src: '/images/아이템 아이콘.jpg',
+        src: resolveAssetUrl('/images/아이템 아이콘.jpg'),
         title: '결과창',
         alt: 'OFF THE RECORD UI & Game Graphics — 결과창',
       },
       {
         id: 'graphics-hud-1',
-        src: '/images/HUD1.jpg',
+        src: resolveAssetUrl('/images/HUD1.jpg'),
         title: 'HUD1',
         alt: 'OFF THE RECORD UI & Game Graphics — HUD1',
       },
       {
         id: 'graphics-hud-2',
-        src: '/images/HUD2.jpg',
+        src: resolveAssetUrl('/images/HUD2.jpg'),
         title: 'HUD2',
         alt: 'OFF THE RECORD UI & Game Graphics — HUD2',
       },
       {
         id: 'graphics-hud-3',
-        src: '/images/HUD3.jpg',
+        src: resolveAssetUrl('/images/HUD3.jpg'),
         title: 'HUD3',
         alt: 'OFF THE RECORD UI & Game Graphics — HUD3',
       },

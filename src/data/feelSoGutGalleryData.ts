@@ -1,4 +1,5 @@
 import { VisualGalleryCategory } from '../types/portfolio';
+import { resolveAssetUrl } from '../utils/assetPath';
 
 /**
  * ============================================================================
@@ -21,13 +22,13 @@ export const feelSoGutVisualGallery: VisualGalleryCategory[] = [
     images: [
       {
         id: 'fsg-key-visual',
-        src: '/images/feel-so-gut/필쏘굿_대표이미지.png',
+        src: resolveAssetUrl('/images/feel-so-gut/필쏘굿_대표이미지.png'),
         title: '대표 이미지',
         alt: 'FEEL SO GUT! 대표 이미지',
       },
       {
         id: 'fsg-logo',
-        src: '/images/feel-so-gut/필쏘꿋_로고.png',
+        src: resolveAssetUrl('/images/feel-so-gut/필쏘꿋_로고.png'),
         title: '로고',
         alt: 'FEEL SO GUT! 로고',
       },
@@ -41,25 +42,25 @@ export const feelSoGutVisualGallery: VisualGalleryCategory[] = [
     images: [
       {
         id: 'fsg-char-jackdoo',
-        src: '/images/feel-so-gut/캐릭터 스프라이트_잭두.png',
+        src: resolveAssetUrl('/images/feel-so-gut/캐릭터 스프라이트_잭두.png'),
         title: '잭두(주인공)',
         alt: 'FEEL SO GUT! 캐릭터 스프라이트 잭두(주인공)',
       },
       {
         id: 'fsg-char-jackdoo-ant',
-        src: '/images/feel-so-gut/캐릭터 스프라이트_ 잭두(개미VER.).png',
+        src: resolveAssetUrl('/images/feel-so-gut/캐릭터 스프라이트_ 잭두(개미VER.).png'),
         title: '잭두(개미VER.)',
         alt: 'FEEL SO GUT! 캐릭터 스프라이트 잭두(개미VER.)',
       },
       {
         id: 'fsg-char-clown',
-        src: '/images/feel-so-gut/캐릭터 스프라이트_ 광대(물귀신).png',
+        src: resolveAssetUrl('/images/feel-so-gut/캐릭터 스프라이트_ 광대(물귀신).png'),
         title: '광대',
         alt: 'FEEL SO GUT! 캐릭터 스프라이트 광대(물귀신)',
       },
       {
         id: 'fsg-char-ant',
-        src: '/images/feel-so-gut/캐릭터 스프라이트_개미.png',
+        src: resolveAssetUrl('/images/feel-so-gut/캐릭터 스프라이트_개미.png'),
         title: '개미',
         alt: 'FEEL SO GUT! 캐릭터 스프라이트 개미',
       },
@@ -79,7 +80,7 @@ export const feelSoGutVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'fsg-start-screen',
-            src: '/images/feel-so-gut/필쏘굿_시작화면.png',
+            src: resolveAssetUrl('/images/feel-so-gut/필쏘굿_시작화면.png'),
             title: '시작 화면',
             alt: 'FEEL SO GUT! 시작 화면',
           },
@@ -92,19 +93,19 @@ export const feelSoGutVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'fsg-lobby-main',
-            src: '/images/feel-so-gut/메인 로비.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/메인 로비.gif'),
             title: '메인 로비',
             alt: 'FEEL SO GUT! 메인 로비 화면 GIF',
           },
           {
             id: 'fsg-lobby-detail-1',
-            src: '/images/feel-so-gut/세부 로비1.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/세부 로비1.gif'),
             title: '세부 로비 1',
             alt: 'FEEL SO GUT! 세부 로비 화면 1 GIF',
           },
           {
             id: 'fsg-lobby-detail-2',
-            src: '/images/feel-so-gut/세부 로비2.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/세부 로비2.gif'),
             title: '세부 로비 2',
             alt: 'FEEL SO GUT! 세부 로비 화면 2 GIF',
           },
@@ -117,31 +118,31 @@ export const feelSoGutVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'fsg-intro-1',
-            src: '/images/feel-so-gut/인트로1.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/인트로1.gif'),
             title: '인트로 1',
             alt: 'FEEL SO GUT! 인트로 1 GIF',
           },
           {
             id: 'fsg-intro-2',
-            src: '/images/feel-so-gut/인트로2.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/인트로2.gif'),
             title: '인트로 2',
             alt: 'FEEL SO GUT! 인트로 2 GIF',
           },
           {
             id: 'fsg-intro-3',
-            src: '/images/feel-so-gut/인트로3.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/인트로3.gif'),
             title: '인트로 3',
             alt: 'FEEL SO GUT! 인트로 3 GIF',
           },
           {
             id: 'fsg-intro-4',
-            src: '/images/feel-so-gut/인트로4.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/인트로4.gif'),
             title: '인트로 4',
             alt: 'FEEL SO GUT! 인트로 4 GIF',
           },
           {
             id: 'fsg-intro-5',
-            src: '/images/feel-so-gut/인트로5.gif',
+            src: resolveAssetUrl('/images/feel-so-gut/인트로5.gif'),
             title: '인트로 5',
             alt: 'FEEL SO GUT! 인트로 5 GIF',
           },
@@ -155,25 +156,25 @@ export const feelSoGutVisualGallery: VisualGalleryCategory[] = [
         images: [
           {
             id: 'fsg-rank-s',
-            src: '/images/feel-so-gut/랭크S.png',
+            src: resolveAssetUrl('/images/feel-so-gut/랭크S.png'),
             title: '랭크 UI · S',
             alt: 'FEEL SO GUT! 플레이 랭크 S UI',
           },
           {
             id: 'fsg-rank-a',
-            src: '/images/feel-so-gut/랭크A.png',
+            src: resolveAssetUrl('/images/feel-so-gut/랭크A.png'),
             title: '랭크 UI · A',
             alt: 'FEEL SO GUT! 플레이 랭크 A UI',
           },
           {
             id: 'fsg-rank-b',
-            src: '/images/feel-so-gut/랭크B.png',
+            src: resolveAssetUrl('/images/feel-so-gut/랭크B.png'),
             title: '랭크 UI · B',
             alt: 'FEEL SO GUT! 플레이 랭크 B UI',
           },
           {
             id: 'fsg-rank-c',
-            src: '/images/feel-so-gut/랭크C.png',
+            src: resolveAssetUrl('/images/feel-so-gut/랭크C.png'),
             title: '랭크 UI · C',
             alt: 'FEEL SO GUT! 플레이 랭크 C UI',
           },

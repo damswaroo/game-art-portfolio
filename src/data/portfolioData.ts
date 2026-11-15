@@ -2,6 +2,7 @@ import { DesignerProfile, Project } from '../types/portfolio';
 import { offTheRecordVisualGallery } from './offTheRecordGalleryData';
 import { feelSoGutVisualGallery } from './feelSoGutGalleryData';
 import { growTheBallVisualGallery } from './growTheBallGalleryData';
+import { resolveAssetUrl } from '../utils/assetPath';
 
 export const designerProfile: DesignerProfile = {
   name: '권유담',
@@ -554,17 +555,17 @@ export const projectsData: Project[] = [
         description: '게임 엔딩의 배경이 되는 오두막 공간 작업물',
         images: [
           {
-            src: '/images/tales-unwritten/cabin.png',
+            src: resolveAssetUrl('/images/tales-unwritten/cabin.png'),
             alt: '오두막 3D 모델 (아이소메트릭 뷰)',
             caption: '오두막 (Cabin) — 아이소메트릭 뷰 3D 모델링',
           },
           {
-            src: '/images/tales-unwritten/cabin2.png',
+            src: resolveAssetUrl('/images/tales-unwritten/cabin2.png'),
             alt: '오두막 3D 모델 (측면 뷰)',
             caption: '오두막 (Cabin) — 측면 뷰 3D 모델링',
           },
           {
-            src: '/images/tales-unwritten/cabin3.png',
+            src: resolveAssetUrl('/images/tales-unwritten/cabin3.png'),
             alt: '오두막 3D 모델 (정면 뷰)',
             caption: '오두막 (Cabin) — 정면 뷰 3D 모델링',
           },
@@ -577,37 +578,37 @@ export const projectsData: Project[] = [
         description: '게임 내 사용된 개별 오브젝트 및 소품 작업물',
         images: [
           {
-            src: '/images/tales-unwritten/teddy-bear.png',
+            src: resolveAssetUrl('/images/tales-unwritten/teddy-bear.png'),
             alt: '곰인형 3D 에셋',
             caption: '곰인형 (Teddy Bear)',
           },
           {
-            src: '/images/tales-unwritten/red-ribbon.png',
+            src: resolveAssetUrl('/images/tales-unwritten/red-ribbon.png'),
             alt: '붉은 리본 3D 에셋',
             caption: '붉은 리본 (Red Ribbon)',
           },
           {
-            src: '/images/tales-unwritten/family-picture.png',
+            src: resolveAssetUrl('/images/tales-unwritten/family-picture.png'),
             alt: '가족 액자 3D 에셋',
             caption: '가족 액자 (Family Picture Frame)',
           },
           {
-            src: '/images/tales-unwritten/burn-paper.png',
+            src: resolveAssetUrl('/images/tales-unwritten/burn-paper.png'),
             alt: '불탄 종이 3D 에셋',
             caption: '불탄 종이 (Burn Paper)',
           },
           {
-            src: '/images/tales-unwritten/tear-paper.png',
+            src: resolveAssetUrl('/images/tales-unwritten/tear-paper.png'),
             alt: '찢어진 종이 3D 에셋',
             caption: '찢어진 종이 (Tear Paper)',
           },
           {
-            src: '/images/tales-unwritten/memo.png',
+            src: resolveAssetUrl('/images/tales-unwritten/memo.png'),
             alt: '메모지 3D 에셋',
             caption: '메모지 (Memo)',
           },
           {
-            src: '/images/tales-unwritten/broken-glass.png',
+            src: resolveAssetUrl('/images/tales-unwritten/broken-glass.png'),
             alt: '깨진 유리 파편 3D 에셋',
             caption: '깨진 유리 (Broken Glass)',
           },
@@ -623,8 +624,8 @@ export const projectsData: Project[] = [
         description:
           '감정 인식 기반 페이셜 인터랙션을 활용한 인터랙티브 스토리텔링 게임 연구(<Tales in Fragments>)로 대학생 논문경진대회에서 동상을 수상했습니다.',
         footer: '2025.07.05 · 공동저자',
-        posterPdfUrl: '/docs/학술대회포스터_최종본.pdf',
-        posterThumbnail: '/docs/academic-poster-preview.png',
+        posterPdfUrl: resolveAssetUrl('/docs/학술대회포스터_최종본.pdf'),
+        posterThumbnail: resolveAssetUrl('/docs/academic-poster-preview.png'),
       },
     ],
     process: [
