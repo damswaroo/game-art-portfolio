@@ -4,6 +4,7 @@ import { Project } from '../types/portfolio';
 import { ArtworkRenderer } from './artworks/ArtworkRenderer';
 import { ProjectThumbnailBadges } from './ProjectThumbnailBadges';
 import { getProjectIntro } from '../data/projectIntrosData';
+import { normalizeContributionRate } from './ProjectContributionCard';
 
 interface Props {
   project: Project;
@@ -17,6 +18,7 @@ export const ProjectCard: React.FC<Props> = ({
   onSelect,
   isLarge = false,
 }) => {
+  const contributionRate = normalizeContributionRate(project.contributionRate);
 
   return (
     <div
@@ -75,8 +77,16 @@ export const ProjectCard: React.FC<Props> = ({
             </button>
           </div>
 
+          {/* Contribution (Simple text-only line below title, above intro) */}
+          <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-xs font-mono tracking-wider uppercase">
+            <span className="text-[#A7AAB0] font-medium">CONTRIBUTION</span>
+            <span className="text-[#C5FA59] font-bold tabular-nums">
+              {contributionRate !== null ? `${contributionRate}%` : '—'}
+            </span>
+          </div>
+
           {/* Subtitle / Core Statement */}
-          <p className="text-sm md:text-base text-[#A7AAB0] mt-2 line-clamp-2 leading-relaxed min-h-[2.5rem] md:min-h-[3rem]">
+          <p className="text-sm md:text-base text-[#A7AAB0] mt-2.5 line-clamp-2 leading-relaxed min-h-[2.5rem] md:min-h-[3rem]">
             {getProjectIntro(project)}
           </p>
         </div>

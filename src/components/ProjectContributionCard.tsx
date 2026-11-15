@@ -5,14 +5,21 @@ interface ProjectContributionCardProps {
   contributionRate?: number | null;
 }
 
+export const normalizeContributionRate = (
+  contributionRate?: number | null
+): number | null => {
+  if (typeof contributionRate !== 'number' || !Number.isFinite(contributionRate)) {
+    return null;
+  }
+  return Math.min(100, Math.max(0, Math.round(contributionRate)));
+};
+
 export const ProjectContributionCard: React.FC<ProjectContributionCardProps> = ({
   contributionRate,
 }) => {
-  const hasValue =
-    typeof contributionRate === 'number' && Number.isFinite(contributionRate);
-  const clampedRate = hasValue
-    ? Math.min(100, Math.max(0, Math.round(contributionRate)))
-    : 0;
+  const normalizedRate = normalizeContributionRate(contributionRate);
+  const hasValue = normalizedRate !== null;
+  const clampedRate = normalizedRate ?? 0;
 
   return (
     <div className="p-5 rounded-xl bg-[#17191E] border border-[#272B33] flex flex-col justify-between space-y-3.5 sm:col-span-2">
