@@ -17,6 +17,7 @@ import { FadeUp } from './animations/ScrollReveal';
 import { ProjectVideoPlayer } from './ProjectVideoPlayer';
 import { ProjectContributionCard } from './ProjectContributionCard';
 import { resolveAssetUrl } from '../utils/assetPath';
+import { getProjectIntro } from '../data/projectIntrosData';
 
 interface Props {
   project: Project;
@@ -232,7 +233,7 @@ export const ProjectDetailView: React.FC<Props> = ({
             {/* 게임 소개 문장 (1~2줄 간결하게, 단어 끊김 방지) */}
             <FadeUp delay={0.15} distance={20} duration={0.75}>
               <p className="text-lg md:text-xl text-[#A7AAB0] font-normal leading-relaxed break-keep max-w-3xl">
-                "{project.summary || project.subtitle}"
+                "{getProjectIntro(project)}"
               </p>
             </FadeUp>
 
@@ -849,6 +850,62 @@ export const ProjectDetailView: React.FC<Props> = ({
                                 );
                               }
 
+                              if (sub.id === 'start-screen') {
+                                return (
+                                  <div key={sub.id} className="space-y-3.5">
+                                    <h4 className="text-xs font-mono font-bold text-[#C5FA59] tracking-wider uppercase">
+                                      {sub.code}
+                                    </h4>
+                                    <div className="grid grid-cols-1">
+                                      {subImages.map((img, subImgIdx) =>
+                                        renderGalleryCard(img, startIndex + subImgIdx, sub.id, 'unit-card')
+                                      )}
+                                    </div>
+                                  </div>
+                                );
+                              }
+
+                              if (sub.id === 'intro-cutscenes') {
+                                return (
+                                  <div key={sub.id} className="space-y-3.5">
+                                    <h4 className="text-xs font-mono font-bold text-[#C5FA59] tracking-wider uppercase">
+                                      {sub.code}
+                                    </h4>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-stretch mx-auto w-full">
+                                      {subImages.map((img, subImgIdx) =>
+                                        renderGalleryCard(img, startIndex + subImgIdx, sub.id, 'unit-card')
+                                      )}
+                                    </div>
+                                  </div>
+                                );
+                              }
+
+                              if (sub.id === 'ui-game-graphics') {
+                                return (
+                                  <div key={sub.id} className="space-y-4">
+                                    <h4 className="text-xs font-mono font-bold text-[#C5FA59] tracking-wider uppercase">
+                                      {sub.code}
+                                    </h4>
+                                    <div className="space-y-5 md:space-y-6">
+                                      {subImages.slice(0, 2).length > 0 && (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 items-stretch">
+                                          {subImages.slice(0, 2).map((img, row2Idx) =>
+                                            renderGalleryCard(img, startIndex + row2Idx, sub.id, 'unit-card')
+                                          )}
+                                        </div>
+                                      )}
+                                      {subImages.slice(2).length > 0 && (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 items-stretch">
+                                          {subImages.slice(2).map((img, row3Idx) =>
+                                            renderGalleryCard(img, startIndex + 2 + row3Idx, sub.id, 'unit-card')
+                                          )}
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                );
+                              }
+
                               return (
                                 <div key={sub.id} className="space-y-3.5">
                                   <h4 className="text-xs font-mono font-bold text-[#C5FA59] tracking-wider uppercase">
@@ -1289,7 +1346,7 @@ export const ProjectDetailView: React.FC<Props> = ({
                                 src={resolvedSrc}
                                 alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
                                 className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                                loading="lazy"
+                                loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
                                 onError={() => markImageFailed(resolvedSrc)}
                               />
                             );
@@ -1379,12 +1436,17 @@ export const ProjectDetailView: React.FC<Props> = ({
                               )}
                           </div>
 
-                          {/* 두 번째 줄: 인트로 컷씬 GIF (갤러리 전체 너비 대형 카드) */}
-                          <div className="space-y-5 md:space-y-6">
+                          {/* 두 번째 줄: 인트로 컷씬 GIF (갤러리 가로 중앙 배치, 최대 너비 550px 반응형 카드) */}
+                          <div className="flex flex-col items-center gap-5 md:gap-6">
                             {images
                               .slice(3)
                               .map((img, extraIdx) =>
-                                renderGrowTheBallCard(img, 3 + extraIdx, 'w-full', true)
+                                renderGrowTheBallCard(
+                                  img,
+                                  3 + extraIdx,
+                                  'w-full max-w-[550px] mx-auto',
+                                  true
+                                )
                               )}
                           </div>
                         </div>

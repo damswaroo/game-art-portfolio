@@ -1,4 +1,5 @@
 import React from 'react';
+import { resolveAssetUrl } from '../../utils/assetPath';
 
 interface Props {
   className?: string;
@@ -6,6 +7,41 @@ interface Props {
 }
 
 export const GrowTheBallArt: React.FC<Props> = ({ className = '', variant = 'card' }) => {
+  // WORKS 카드 대표 썸네일: '시작 화면 (메인 타이틀)' 이미지 표시
+  if (variant === 'card') {
+    const thumbSrc = resolveAssetUrl('/images/공좀키워오게/시작화면.png');
+    return (
+      <div
+        className={`relative w-full h-full overflow-hidden select-none bg-[#090A0D] flex items-center justify-center ${className}`}
+      >
+        {/* 왜곡 없이 16:10 카드 비율을 꽉 채우는 앰비언트 블러 배경 */}
+        <img
+          src={thumbSrc}
+          alt=""
+          aria-hidden="true"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
+          className="absolute inset-0 w-full h-full object-cover blur-md opacity-35 scale-105 pointer-events-none"
+        />
+
+        {/* 16:9 '시작 화면 (메인 타이틀)' 이미지가 잘리거나 왜곡되지 않도록 선명한 전경 썸네일 표시 */}
+        <img
+          src={thumbSrc}
+          alt="공 좀 키워오게 메인 썸네일"
+          onError={(e) => {
+            e.currentTarget.style.opacity = '0';
+          }}
+          className="relative z-10 w-full h-full object-contain"
+          loading="lazy"
+        />
+
+        {/* 다크 테마 비네팅 오버레이 */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#101114]/50 via-transparent to-transparent pointer-events-none z-20" />
+      </div>
+    );
+  }
+
   const isDetailed = variant === 'detailed' || variant === 'hero';
 
   return (

@@ -2,6 +2,8 @@ import { DesignerProfile, Project } from '../types/portfolio';
 import { offTheRecordVisualGallery } from './offTheRecordGalleryData';
 import { feelSoGutVisualGallery } from './feelSoGutGalleryData';
 import { growTheBallVisualGallery } from './growTheBallGalleryData';
+import { projectVideosData } from './projectVideosData';
+import { projectIntrosData } from './projectIntrosData';
 import { resolveAssetUrl } from '../utils/assetPath';
 
 export const designerProfile: DesignerProfile = {
@@ -60,19 +62,13 @@ export const designerProfile: DesignerProfile = {
   },
 };
 
-const OFF_THE_RECORD_INTRO =
-  '빚을 갚기 위해 우주 쓰레기를 수집하고 귀환하는 SF 익스트랙션 게임';
-
-const GROW_THE_BALL_INTRO =
-  '작은 공으로 시작해 주변의 오브젝트를 흡수하며 점점 몸집을 키워나가는 성장형 아케이드 게임';
-
 export const projectsData: Project[] = [
   {
     id: 'off-the-record',
     slug: 'off-the-record',
     title: 'OFF THE RECORD',
     previousTitle: '우주해체 대작전',
-    subtitle: OFF_THE_RECORD_INTRO,
+    subtitle: projectIntrosData['off-the-record'],
     kicker: 'ART DIRECTION & VISUAL ASSETS',
     category: 'Game Art',
     subCategory: 'GAME VISUAL DESIGN / ART DIRECTION / VISUAL ASSETS',
@@ -80,6 +76,11 @@ export const projectsData: Project[] = [
     status: 'IN DEVELOPMENT',
     period: '2026 · ONGOING',
     tools: ['Adobe Photoshop', 'Adobe Illustrator', 'Generative AI'],
+    thumbnailBadges: [
+      { label: '2026 미래 게임잼 최우수상', type: 'award', date: '2026.09.13' },
+      { label: 'INDIE-U 2026 · 대학부 우수상', type: 'award', date: '2026.11.25' },
+      { label: 'G-STAR 2026 EXHIBITION', type: 'activity', date: '2026.11.18' },
+    ],
     team: '3U STUDIO (삼유스튜디오) · 3인 개발팀',
     teamMembers: [
       {
@@ -98,14 +99,10 @@ export const projectsData: Project[] = [
         isSelf: true,
       },
     ],
-    video: {
-      src: '',
-      youtubeUrl: '',
-      caption: 'OFF THE RECORD — GAMEPLAY / TRAILER',
-    },
+    video: projectVideosData['off-the-record'],
     roleScope: '게임 아트 총괄 및 시각 리소스 제작',
     contributionRate: 40,
-    summary: OFF_THE_RECORD_INTRO,
+    summary: projectIntrosData['off-the-record'],
     overview: {
       purpose:
         '우주 쓰레기로 가득 찬 궤도 세계 속에서 단절된 통신과 잔해를 탐사하고 미지의 기록을 복원해 나가는 여정을 시각화했습니다.',
@@ -317,7 +314,7 @@ export const projectsData: Project[] = [
     id: 'feel-so-gut',
     slug: 'feel-so-gut',
     title: 'FEEL SO GUT!',
-    subtitle: '사이버 무속을 콘셉트로 리듬과 굿을 통해 귀신과 놀아주며 성불을 돕는 2D 리듬게임.',
+    subtitle: projectIntrosData['feel-so-gut'],
     kicker: 'Visual Concept & 2D Game Art',
     category: 'Game Art',
     subCategory: 'GAME VISUAL DESIGN / ART DIRECTION / VISUAL ASSETS',
@@ -326,11 +323,10 @@ export const projectsData: Project[] = [
     platform: 'STOVE INDIE BOOST LAB (등록 완료)',
     period: '2026.03 - 2026.08',
     tools: ['Adobe Photoshop', 'Adobe Illustrator', 'Generative AI'],
-    video: {
-      src: '',
-      youtubeUrl: '',
-      caption: 'FEEL SO GUT! — GAMEPLAY / TRAILER',
-    },
+    thumbnailBadges: [
+      { label: 'STOVE INDIE BOOST LAB 등록 완료', type: 'activity' },
+    ],
+    video: projectVideosData['feel-so-gut'],
     externalLinks: [
       {
         label: 'STOVE 인디 부스트랩',
@@ -340,8 +336,7 @@ export const projectsData: Project[] = [
     team: '3U STUDIO (삼유스튜디오) · 3인 개발팀',
     roleScope: '게임 아트 전반 담당 — 캐릭터·배경 디자인, UI 및 캐릭터 스프라이트 제작',
     contributionRate: 30,
-    summary:
-      '사이버 무속을 콘셉트로 리듬과 굿을 통해 귀신과 놀아주며 성불을 돕는 2D 리듬게임.',
+    summary: projectIntrosData['feel-so-gut'],
     overview: {
       purpose:
         '한국적 문화 원형(무속, 부적, 오방색)을 미래 디스토피아 감성으로 재해석하여, 전 세계 게이머에게 신선한 시각적 충격과 리드미컬한 카타르시스를 전달하는 독창적 아트 스타일 구축.',
@@ -452,28 +447,27 @@ export const projectsData: Project[] = [
     id: 'grow-the-ball',
     slug: 'grow-the-ball',
     title: '공 좀 키워오게',
-    subtitle: GROW_THE_BALL_INTRO,
+    subtitle: projectIntrosData['grow-the-ball'],
     kicker: 'Growth Arcade · Game Art Assets',
     category: 'Game Art',
-    subCategory: '성장형 아케이드 (Growth Arcade)',
+    subCategory: 'GAME VISUAL DESIGN / ART DIRECTION / VISUAL ASSETS',
     status: '2026 SW융합대학 게임개발 경진대회 우수상',
     period: '2026.10 – 2026.11 (1개월)',
     tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Generative AI', 'Blender'],
-    video: {
-      src: '',
-      youtubeUrl: '',
-      caption: '공 좀 키워오게 — GAMEPLAY / TRAILER',
-    },
+    thumbnailBadges: [
+      { label: '2026 SW융합대학 게임개발 경진대회 우수상', type: 'award', date: '2026.11.11' },
+    ],
+    video: projectVideosData['grow-the-ball'],
     team: '2인 팀(개발 1, 아트1)',
     roleScope: '게임 아트 에셋 제작',
     contributionRate: 40,
-    summary: GROW_THE_BALL_INTRO,
+    summary: projectIntrosData['grow-the-ball'],
     overview: {
       purpose:
         '작은 공에서 시작해 주변 오브젝트를 흡수하며 점차 거대해지는 성장형 아케이드 게임의 시각적 스케일감과 직관적인 오브젝트 식별성을 아트 에셋으로 구현했습니다.',
       background:
         '순천향대학교 제3회 SW융합대학 학술제 게임개발 경진대회 출품작으로 제작되었으며, 단계별 성장에 어울리는 2D·3D 그래픽 리소스 및 인게임 아트 에셋을 제작해 우수상을 수상했습니다.',
-      keyThemes: ['Growth Arcade', 'Object Absorption', 'Game Art Assets', '2D & 3D Visuals'],
+      keyThemes: ['Growth Arcade', 'Object Absorption', 'Casual Style', 'Cartoon Aesthetics', '2D & 3D Visuals'],
     },
     myRole: {
       roleTitle: '게임 아트 에셋 제작',
@@ -512,23 +506,24 @@ export const projectsData: Project[] = [
     id: 'tales-unwritten',
     slug: 'tales-unwritten',
     title: 'TALES UNWRITTEN',
-    subtitle:
-      '웹캠으로 플레이어의 표정을 인식하고, 아이템이 요구하는 감정과 일치하면 수집할 수 있는 표정 인식 기반 인터랙티브 게임.',
+    subtitle: projectIntrosData['tales-unwritten'],
     kicker: 'Game Planning & 3D Modeling',
     category: 'Game Art',
     subCategory: '기획 / 3D 에셋 제작(모델링)',
     period: '2025.04 – 2025.05 (2개월)',
     tools: ['Blender', 'Unity', 'MediaPipe'],
-    video: {
-      src: '',
-      youtubeUrl: '',
-      caption: 'TALES UNWRITTEN — INTERACTION DEMO / TRAILER',
-    },
+    thumbnailBadges: [
+      {
+        label: '2025 한국디지털콘텐츠학회 대학생 논문경진대회 동상',
+        type: 'award',
+        date: '2025.07.05',
+      },
+    ],
+    video: projectVideosData['tales-unwritten'],
     team: '2인 팀 프로젝트 (개발 1, 기획·3D 에셋 제작 1)',
     roleScope: '기획 및 3D 에셋 제작(모델링)',
     contributionRate: 40,
-    summary:
-      '플레이어의 얼굴 표정을 실시간으로 인식하고 감정을 분석하는 인터랙티브 스토리 게임. 아이템마다 요구되는 감정이 있으며, 플레이어가 해당 감정을 표정으로 표현하면 이를 분석해 일치 여부를 판정하고 아이템을 수집하는 시스템을 구현했습니다.',
+    summary: projectIntrosData['tales-unwritten'],
     overview: {
       purpose:
         '아이템마다 요구되는 감정을 플레이어의 실시간 표정으로 표현하면 이를 분석해 일치 여부를 판정하고 아이템을 수집하는 새로운 감성 인터랙션 시스템을 구현했습니다.',

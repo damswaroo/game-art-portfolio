@@ -51,6 +51,15 @@ export type AchievementBadgeType =
   | 'ongoing'
   | 'upcoming';
 
+export type ProjectThumbnailBadgeType = 'award' | 'activity';
+
+export interface ProjectThumbnailBadge {
+  label: string;
+  type: ProjectThumbnailBadgeType;
+  awardRank?: number;
+  date?: string;
+}
+
 export interface ProjectAchievement {
   title: string;
   badge: string;
@@ -132,6 +141,7 @@ export interface Project {
     steps: { title: string; tool: string; description: string }[];
   };
 
+  thumbnailBadges?: ProjectThumbnailBadge[];
   projectAchievements?: ProjectAchievement[];
 
   developmentStatus?: {

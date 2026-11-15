@@ -39,7 +39,7 @@ export const growTheBallVisualGallery: VisualGalleryCategory[] = [
       },
       {
         id: 'gtb-intro-cutscene',
-        src: resolveAssetUrl('/images/공좀키워오게/인트로컷씬.gif'),
+        src: resolveAssetUrl('/images/공좀키워오게/인트로.gif'),
         title: '인트로 컷씬',
         alt: '공 좀 키워오게 인트로 컷씬 GIF',
       },

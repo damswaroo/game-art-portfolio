@@ -15,11 +15,11 @@ import { ProjectVideo } from '../types/portfolio';
 
 export const projectVideosData: Record<string, ProjectVideo> = {
   'off-the-record': {
-    youtubeUrl: '',
+    youtubeUrl: 'https://youtu.be/HJ_KCXzhRTs',
     caption: 'OFF THE RECORD — GAMEPLAY / TRAILER',
   },
   'feel-so-gut': {
-    youtubeUrl: '',
+    youtubeUrl: 'https://youtu.be/EjUfez7XZA4',
     caption: 'FEEL SO GUT! — GAMEPLAY / TRAILER',
   },
   'koongya-roblox': {
@@ -27,11 +27,11 @@ export const projectVideosData: Record<string, ProjectVideo> = {
     caption: '쿵야 레스토랑즈 IP 로블록스 게임 — GAMEPLAY / TRAILER',
   },
   'tales-unwritten': {
-    youtubeUrl: '',
+    youtubeUrl: 'https://youtu.be/xzt4N9Qe4Dk',
     caption: 'TALES UNWRITTEN — INTERACTION DEMO / TRAILER',
   },
   'grow-the-ball': {
-    youtubeUrl: '',
+    youtubeUrl: 'https://youtu.be/9TsxPFyDzSc',
     caption: '공 좀 키워오게 — GAMEPLAY / TRAILER',
   },
 };

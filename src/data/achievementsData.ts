@@ -42,7 +42,6 @@ export const initialAchievements: Achievement[] = [
     year: 2026,
     order: 2,
     highlight: true,
-    statusBadge: '우수상',
     awardDivision: '팀 수상 (2인)',
     description: '제3회 SW융합대학 학술제 게임개발 경진대회에서 우수상 수상.',
     proofs: [
