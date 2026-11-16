@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { motion } from 'motion/react';
 import { FadeUp } from './animations/ScrollReveal';
 import { resolveAssetUrl } from '../utils/assetPath';
 
@@ -8,7 +9,66 @@ interface Props {
   onOpenFeaturedProject: () => void;
 }
 
+interface HeroSlide {
+  id: string;
+  title: string;
+  imageSrc: string;
+  positionClass: string;
+}
+
+const SLIDE_INTERVAL_MS = 5000;
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 'off-the-record',
+    title: 'OFF THE RECORD',
+    imageSrc: '/images/오프더레코드_썸네일2.png',
+    positionClass: 'bg-[74%_center] sm:bg-[72%_center] md:bg-[68%_center]',
+  },
+  {
+    id: 'feel-so-gut',
+    title: 'FEEL SO GUT!',
+    imageSrc: '/images/필쏘굿_썸네일.png',
+    positionClass: 'bg-[62%_center] sm:bg-[64%_center] md:bg-[60%_center]',
+  },
+];
+
 export const HeroSection: React.FC<Props> = ({ onExploreClick, onOpenFeaturedProject }) => {
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Detect prefers-reduced-motion preference
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    updatePreference();
+
+    mediaQuery.addEventListener('change', updatePreference);
+    return () => mediaQuery.removeEventListener('change', updatePreference);
+  }, []);
+
+  // Preload all slideshow images so transitions never flicker or show a blank frame
+  useEffect(() => {
+    HERO_SLIDES.forEach((slide) => {
+      const img = new window.Image();
+      img.src = resolveAssetUrl(slide.imageSrc);
+    });
+  }, []);
+
+  // Auto-advance slides every 5 seconds and loop continuously
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, SLIDE_INTERVAL_MS);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const currentSlide = HERO_SLIDES[activeSlideIndex];
+  const formattedCurrent = String(activeSlideIndex + 1).padStart(2, '0');
+  const formattedTotal = String(HERO_SLIDES.length).padStart(2, '0');
+
   return (
     <section id="hero" className="relative min-h-screen pt-28 pb-16 md:py-32 flex flex-col justify-between overflow-hidden bg-[#101114]">
       {/* Layer 1: Ambient Green Light Halo (Soft illumination spreading from right to center) */}
@@ -17,16 +77,43 @@ export const HeroSection: React.FC<Props> = ({ onExploreClick, onOpenFeaturedPro
         aria-hidden="true"
       />
 
-      {/* Layer 2: Ambient Unsplash Background Image (Philipp Hubert - uqWRXjbDplg) at 60% opacity */}
+      {/* Layer 2: Project Key Visual Background Slideshow (1.2s Crossfade + Subtle Slow Zoom) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {HERO_SLIDES.map((slide, index) => {
+          const isActive = index === activeSlideIndex;
+          const resolvedSrc = resolveAssetUrl(slide.imageSrc);
+
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 ${
+                prefersReducedMotion
+                  ? 'transition-opacity duration-300'
+                  : 'transition-opacity duration-[1200ms] ease-in-out'
+              } ${isActive ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <div
+                className={`w-full h-full bg-cover bg-no-repeat ${slide.positionClass} ${
+                  prefersReducedMotion
+                    ? 'scale-100'
+                    : `transition-transform duration-[6000ms] ease-out ${
+                        isActive ? 'scale-[1.05]' : 'scale-100'
+                      }`
+                }`}
+                style={{ backgroundImage: `url('${resolvedSrc}')` }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Layer 3: Overall Subtle Dark Veil + Left-to-Right Readability Gradient */}
       <div
-        className="absolute inset-0 pointer-events-none bg-cover bg-no-repeat bg-[center_right] md:bg-[85%_50%] opacity-60 brightness-125 contrast-120 saturate-160 transition-opacity duration-700"
-        style={{ backgroundImage: `url('${resolveAssetUrl('/images/hero-bg.jpg')}')` }}
+        className="absolute inset-0 pointer-events-none bg-[#101114]/45 md:bg-[#101114]/30"
         aria-hidden="true"
       />
-
-      {/* Layer 3: Streamlined Black Overlay (~25% base tint with leftward text protection & seamless edges) */}
       <div
-        className="absolute inset-0 pointer-events-none bg-black/25 bg-gradient-to-r from-[#101114] via-[#101114]/80 via-40% to-transparent"
+        className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#101114] via-[#101114]/90 via-55% md:via-[#101114]/80 md:via-45% to-[#101114]/25 md:to-transparent"
         aria-hidden="true"
       />
 
@@ -101,8 +188,8 @@ export const HeroSection: React.FC<Props> = ({ onExploreClick, onOpenFeaturedPro
         </div>
       </div>
 
-      {/* Bottom Scroll Indicator Strip */}
-      <div className="relative z-10 max-w-[1200px] w-full mx-auto px-6 md:px-12 pt-12 flex items-center justify-between text-xs font-mono text-[#A7AAB0]">
+      {/* Bottom Scroll & Minimal Slide Indicator Strip */}
+      <div className="relative z-10 max-w-[1200px] w-full mx-auto px-6 md:px-12 pt-12 flex flex-wrap items-end justify-between gap-6 text-xs font-mono text-[#A7AAB0]">
         <FadeUp delay={0.4} distance={15}>
           <button
             onClick={onExploreClick}
@@ -111,6 +198,40 @@ export const HeroSection: React.FC<Props> = ({ onExploreClick, onOpenFeaturedPro
             <span className="tracking-widest uppercase">SCROLL TO EXPLORE</span>
             <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1 text-[#C5FA59]" />
           </button>
+        </FadeUp>
+
+        {/* Bottom-Right Minimal Slideshow Indicator */}
+        <FadeUp delay={0.45} distance={15}>
+          <div className="w-40 sm:w-48 space-y-2 py-2 select-none" aria-live="polite">
+            <div className="flex items-baseline justify-between gap-2 text-[11px] font-mono">
+              <span className="text-[#F5F4F0]/90 font-medium truncate">
+                {currentSlide.title}
+              </span>
+              <span className="shrink-0 tabular-nums tracking-wider">
+                <span className="text-[#C5FA59] font-bold">{formattedCurrent}</span>
+                <span className="text-[#565C69]"> / {formattedTotal}</span>
+              </span>
+            </div>
+
+            <div className="w-full h-[2px] bg-[#24262B]/90 rounded-full overflow-hidden">
+              {prefersReducedMotion ? (
+                <div
+                  className="h-full bg-[#C5FA59] rounded-full transition-all duration-300"
+                  style={{
+                    width: `${((activeSlideIndex + 1) / HERO_SLIDES.length) * 100}%`,
+                  }}
+                />
+              ) : (
+                <motion.div
+                  key={activeSlideIndex}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: SLIDE_INTERVAL_MS / 1000, ease: 'linear' }}
+                  className="w-full h-full bg-[#C5FA59] rounded-full origin-left"
+                />
+              )}
+            </div>
+          </div>
         </FadeUp>
       </div>
     </section>

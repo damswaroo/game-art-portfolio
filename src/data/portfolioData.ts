@@ -330,7 +330,7 @@ export const projectsData: Project[] = [
     externalLinks: [
       {
         label: 'STOVE 인디 부스트랩',
-        url: 'https://page.onstove.com/boostlab/global/view/14624450?boardKey=147914',
+        url: 'https://store.onstove.com/ko/games/106327',
       },
     ],
     team: '3U STUDIO (삼유스튜디오) · 3인 개발팀',
