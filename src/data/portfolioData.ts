@@ -332,6 +332,10 @@ export const projectsData: Project[] = [
         label: 'STOVE 인디 부스트랩',
         url: 'https://store.onstove.com/ko/games/106327',
       },
+      {
+        label: '개발 관리 노션',
+        url: 'https://app.notion.com/p/376583ac7e2c8125b289c0a3992dae58',
+      },
     ],
     team: '3U STUDIO (삼유스튜디오) · 3인 개발팀',
     roleScope: '게임 아트 전반 담당 — 캐릭터·배경 디자인, UI 및 캐릭터 스프라이트 제작',
