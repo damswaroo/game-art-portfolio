@@ -31,6 +31,12 @@ const HERO_SLIDES: HeroSlide[] = [
     imageSrc: '/images/feel-so-gut/필쏘굿_슬라이드이미지-1.jpg',
     positionClass: 'bg-[68%_15%] sm:bg-[68%_15%] md:bg-[66%_15%]',
   },
+  {
+    id: 'grow-the-ball',
+    title: '공 좀 키워오게',
+    imageSrc: '/images/공좀키워오게/공좀키워오게_슬라이드이미지.png',
+    positionClass: 'bg-[72%_68%] sm:bg-[72%_65%] md:bg-[68%_60%]',
+  },
 ];
 
 export const HeroSection: React.FC<Props> = ({ onExploreClick, onOpenFeaturedProject }) => {

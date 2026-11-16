@@ -22,6 +22,7 @@ export interface VisualGalleryImage {
   description?: string;
   caption?: string;
   alt?: string;
+  imageClassName?: string;
 }
 
 export interface VisualGallerySubcategory {

@@ -452,7 +452,7 @@ export const projectsData: Project[] = [
     category: 'Game Art',
     subCategory: 'GAME VISUAL DESIGN / ART DIRECTION / VISUAL ASSETS',
     status: '2026 SW융합대학 게임개발 경진대회 우수상',
-    period: '2026.10 – 2026.11 (1개월)',
+    period: '2026.11 (약 1주일)',
     tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Generative AI', 'Blender'],
     thumbnailBadges: [
       { label: '2026 SW융합대학 게임개발 경진대회 우수상', type: 'award', date: '2026.11.11' },

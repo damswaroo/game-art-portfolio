@@ -31,7 +31,7 @@ export const projectVideosData: Record<string, ProjectVideo> = {
     caption: 'TALES UNWRITTEN — INTERACTION DEMO / TRAILER',
   },
   'grow-the-ball': {
-    youtubeUrl: 'https://youtu.be/9TsxPFyDzSc',
+    youtubeUrl: 'https://youtu.be/ubRGYI-gN2s',
     caption: '공 좀 키워오게 — GAMEPLAY / TRAILER',
   },
 };

@@ -1310,7 +1310,8 @@ export const ProjectDetailView: React.FC<Props> = ({
                   img: (typeof images)[number],
                   imgIdx: number,
                   wrapperWidthClass: string,
-                  isFullWidthCard = false
+                  isFullWidthCard = false,
+                  frameAspectClass = 'aspect-[16/9]'
                 ) => {
                   const isCenteredTitleOnly = !(img.description || img.caption);
                   return (
@@ -1328,7 +1329,7 @@ export const ProjectDetailView: React.FC<Props> = ({
                         className="group relative rounded-xl bg-[#17191E] border border-[#272B33] overflow-hidden hover:border-[#C5FA59]/70 transition-all duration-300 cursor-pointer shadow-md hover:shadow-[#C5FA59]/10 flex flex-col w-full"
                       >
                         <div
-                          className={`relative w-full aspect-[16/9] ${
+                          className={`relative w-full ${frameAspectClass} ${
                             isFullWidthCard ? 'p-2 sm:p-3' : 'p-1.5 sm:p-2'
                           } bg-[#0E1015] overflow-hidden flex items-center justify-center`}
                         >
@@ -1345,7 +1346,9 @@ export const ProjectDetailView: React.FC<Props> = ({
                               <img
                                 src={resolvedSrc}
                                 alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
-                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                                className={`w-full h-full object-contain transition-transform duration-500 ${
+                                  img.imageClassName || 'group-hover:scale-[1.03]'
+                                }`}
                                 loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
                                 onError={() => markImageFailed(resolvedSrc)}
                               />
@@ -1398,7 +1401,7 @@ export const ProjectDetailView: React.FC<Props> = ({
                     key={cat.id}
                     className={`space-y-6 ${idx > 0 ? 'pt-10 border-t border-[#24262B]' : ''}`}
                   >
-                    {/* 카테고리 헤더: 번호(01~03), 제목, 영문 태그, 설명 (왼쪽 정렬 유지) */}
+                    {/* 카테고리 헤더: 번호(01~04), 제목, 영문 태그, 설명 (왼쪽 정렬 유지) */}
                     <FadeUp delay={idx * 0.05} distance={15} duration={0.6}>
                       <div className="space-y-2 text-left">
                         <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -1449,6 +1452,18 @@ export const ProjectDetailView: React.FC<Props> = ({
                                 )
                               )}
                           </div>
+                        </div>
+                      ) : cat.id === 'character-visuals' ? (
+                        <div className="flex flex-wrap justify-center gap-5 md:gap-6 items-stretch">
+                          {images.map((img, imgIdx) =>
+                            renderGrowTheBallCard(
+                              img,
+                              imgIdx,
+                              'w-full max-w-[400px] sm:max-w-none sm:w-[calc((100%_-_1.25rem)_/_2_-_0.5px)] md:w-[calc((100%_-_1.5rem)_/_2_-_0.5px)] lg:w-[calc((100%_-_3rem)_/_3_-_0.5px)]',
+                              false,
+                              'aspect-[16/9]'
+                            )
+                          )}
                         </div>
                       ) : (
                         <div className="flex flex-wrap justify-center gap-5 md:gap-6 items-stretch">
@@ -1872,7 +1887,7 @@ export const ProjectDetailView: React.FC<Props> = ({
                     className={`${
                       currentImage.id === 'gtb-intro-cutscene'
                         ? 'w-[min(85vw,56rem)] h-auto max-h-[75vh]'
-                        : 'max-h-[75vh] max-w-full'
+                        : 'w-auto h-auto max-h-[75vh] max-w-full'
                     } object-contain rounded-lg shadow-2xl border border-[#282C36]`}
                     onError={() => markImageFailed(resolvedCurrentSrc)}
                   />

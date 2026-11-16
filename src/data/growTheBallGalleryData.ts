@@ -7,15 +7,59 @@ import { resolveAssetUrl } from '../utils/assetPath';
  * ============================================================================
  *
  * [이미지 파일 등록 가이드]
- * 1. `public/images/grow-the-ball/` 폴더에 작업물 파일(JPG, JPEG, PNG, GIF)을 추가합니다.
+ * 1. `public/images/공좀키워오게/` 폴더에 작업물 파일(JPG, JPEG, PNG, GIF)을 추가합니다.
  * 2. 아래 각 카테고리의 `images` 배열에 `{ id, src, title, description, alt }` 객체를 추가하면
  *    상세페이지 02 / VISUAL WORKS 갤러리 및 확대 보기 모달에 자동으로 표시됩니다.
  */
 
+/**
+ * 캐릭터 비주얼(CHARACTER VISUALS) 등록용 이미지 목록
+ * - 아래 예시 형식을 참고해 캐릭터 메인 일러스트, 전신 디자인, 캐릭터 시트(정면·측면·후면),
+ *   표정 시트, 기타 캐릭터 비주얼 작업물을 순서대로 추가하세요.
+ * - 파일명(src)과 표시 제목(title)을 각각 관리할 수 있으며, 배열 순서대로 화면에 표시됩니다.
+ *
+ * 예시:
+ * {
+ *   id: 'gtb-char-paper-student',
+ *   src: resolveAssetUrl('/images/공좀키워오게/종이학생_캐릭터시트.png'),
+ *   title: '종이 학생 캐릭터',
+ *   alt: '공 좀 키워오게 종이 학생 캐릭터 시트',
+ * },
+ * {
+ *   id: 'gtb-char-stamp-professor',
+ *   src: resolveAssetUrl('/images/공좀키워오게/도장교수_캐릭터시트.png'),
+ *   title: '도장 교수 캐릭터',
+ *   alt: '공 좀 키워오게 도장 교수 캐릭터 시트',
+ * },
+ */
+export const growTheBallCharacterVisuals: VisualGalleryCategory['images'] = [
+  {
+    id: 'gtb-char-paper-student',
+    src: resolveAssetUrl('/images/공좀키워오게/종이학생_캐릭터시트.png'),
+    title: '종이 학생 캐릭터',
+    alt: '공 좀 키워오게 종이 학생 캐릭터 시트',
+    imageClassName: 'scale-[1.02] translate-y-[2%] group-hover:scale-[1.05]',
+  },
+  {
+    id: 'gtb-char-stamp-professor',
+    src: resolveAssetUrl('/images/공좀키워오게/도장교수_캐릭터시트.png'),
+    title: '도장 교수 캐릭터',
+    alt: '공 좀 키워오게 도장 교수 캐릭터 시트',
+    imageClassName: 'scale-[1.18] group-hover:scale-[1.22]',
+  },
+];
+
 export const growTheBallVisualGallery: VisualGalleryCategory[] = [
   {
+    id: 'character-visuals',
+    categoryCode: '01 / CHARACTER VISUALS',
+    title: '캐릭터 비주얼',
+    description: '게임에 등장하는 캐릭터의 비주얼 디자인 및 캐릭터 시트 작업물',
+    images: growTheBallCharacterVisuals,
+  },
+  {
     id: 'start-intro-cutscenes',
-    categoryCode: '01 / START SCREEN & INTRO CUTSCENES',
+    categoryCode: '02 / START SCREEN & INTRO CUTSCENES',
     title: '시작화면 및 인트로 컷씬',
     description: '게임의 시작 화면과 인트로 연출 컷씬 작업물',
     images: [
@@ -47,7 +91,7 @@ export const growTheBallVisualGallery: VisualGalleryCategory[] = [
   },
   {
     id: 'result-ranking-screen',
-    categoryCode: '02 / RESULT SCREEN & RANKING SCREEN',
+    categoryCode: '03 / RESULT SCREEN & RANKING SCREEN',
     title: '결과 화면 및 랭킹 화면',
     description: '플레이 결과 화면과 랭킹 UI 디자인 작업물',
     images: [
@@ -73,7 +117,7 @@ export const growTheBallVisualGallery: VisualGalleryCategory[] = [
   },
   {
     id: 'gameplay-screens',
-    categoryCode: '03 / GAMEPLAY SCREENS',
+    categoryCode: '04 / GAMEPLAY SCREENS',
     title: '게임 플레이 화면',
     description: '게임의 실제 플레이 장면과 성장 단계별 게임 플레이 화면',
     images: [
