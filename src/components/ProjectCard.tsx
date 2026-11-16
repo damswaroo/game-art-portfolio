@@ -101,7 +101,7 @@ export const ProjectCard: React.FC<Props> = ({
                     ? project.tools
                     : project.tools.slice(0, 3)
                   ).join(' · ')
-                : 'UI Design · Icon Design · 3D Modeling'}
+                : project.roleScope || 'UI Design · Icon Design · 3D Modeling'}
             </span>
           </div>
         </div>

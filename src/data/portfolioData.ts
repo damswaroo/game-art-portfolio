@@ -2,6 +2,7 @@ import { DesignerProfile, Project } from '../types/portfolio';
 import { offTheRecordVisualGallery } from './offTheRecordGalleryData';
 import { feelSoGutVisualGallery } from './feelSoGutGalleryData';
 import { growTheBallVisualGallery } from './growTheBallGalleryData';
+import { dontGetCookedKoongyaVisualGallery } from './dontGetCookedKoongyaGalleryData';
 import { projectVideosData } from './projectVideosData';
 import { projectIntrosData } from './projectIntrosData';
 import { resolveAssetUrl } from '../utils/assetPath';
@@ -694,6 +695,76 @@ export const projectsData: Project[] = [
         '신기술(컴퓨터 비전)이 도입된 게임일수록, 기술 자체를 과시하는 복잡한 UI보다 플레이어가 인지 부하 없이 자연스럽게 직관적으로 받아들일 수 있는 미니멀한 인터페이스가 핵심임을 확인했습니다.',
       futureImprovements:
         '시선 추적(Eye-tracking) 센서 데이터와 연계하여 플레이어가 바라보고 있는 NPC에게만 감정 선택지가 발동되는 2차 프로토타입을 준비하고 있습니다.',
+    },
+  },
+  {
+    id: 'dont-get-cooked-koongya',
+    slug: 'dont-get-cooked-koongya',
+    title: "Don't get cooked, Koongya!",
+    subtitle: projectIntrosData['dont-get-cooked-koongya'],
+    kicker: 'Roblox Asymmetric Survival · Prototype',
+    category: 'Game Art',
+    subCategory: 'ROBLOX · 1:5 ASYMMETRIC SURVIVAL',
+    genre: '1:5 비대칭 멀티플레이 서바이벌',
+    platform: 'Roblox',
+    ip: '넷마블 「쿵야 레스토랑즈」',
+    developmentStage: '프로토타입 제작 완료 / 현재 개발 진행 중',
+    period: '추후 입력',
+    tools: [],
+    thumbnailBadges: [
+      { label: 'PROTOTYPE', type: 'activity' },
+      { label: 'IN DEVELOPMENT', type: 'activity' },
+    ],
+    prototypeVideos: projectVideosData['dont-get-cooked-koongya']?.videos || [],
+    team: '2인 팀(개발 1, 아트1)',
+    roleScope: '게임 UI 디자인 · 아이콘 디자인 · 3D 에셋 모델링',
+    contributionRate: null,
+    summary: projectIntrosData['dont-get-cooked-koongya'],
+    overview: {
+      purpose:
+        '넷마블의 「쿵야 레스토랑즈」 IP를 활용하여 Roblox 플랫폼에서 개발 중인 1:5 비대칭 멀티플레이 서바이벌 게임입니다.',
+      background: [
+        '넷마블의 「쿵야 레스토랑즈」 IP를 활용하여 Roblox 플랫폼에서 개발 중인 1:5 비대칭 멀티플레이 서바이벌 게임입니다.',
+        '한 명의 셰프와 다섯 명의 쿵야가 각각 추격자와 생존자로 나뉘어 서로 다른 목표를 달성하기 위해 경쟁합니다.',
+        '셰프는 쿵야를 추격하고 붙잡아 요리를 완성해야 하며, 쿵야는 셰프의 추격을 피해 살아남거나 동료를 구조하고 탈출해야 합니다.',
+        '역할별 고유 스킬, 가스 밸브 조작, 특선 재료 수집 등의 시스템을 통해 다양한 전략적 플레이가 가능하도록 기획했습니다.',
+        '현재 프로토타입 제작을 완료했으며, 게임 시스템과 콘텐츠의 완성도를 높이기 위해 지속적으로 개발 및 개선을 진행하고 있습니다.',
+      ].join('\n\n'),
+      keyThemes: [
+        'Asymmetric Survival',
+        '1v5 Multiplayer',
+        'Chase & Escape',
+        'Team Cooperation',
+        'Casual Cartoon Aesthetics',
+      ],
+      platform: 'Roblox',
+    },
+    myRole: {
+      roleTitle: '게임 UI 디자인 · 아이콘 디자인 · 3D 에셋 모델링',
+      directResponsibilities: [
+        '게임 UI 디자인',
+        '아이콘 디자인',
+        '3D 에셋 모델링',
+      ],
+      collaborationProcess:
+        '현재 프로토타입 제작을 완료했으며, 게임 시스템과 콘텐츠의 완성도를 높이기 위해 지속적으로 개발 및 개선을 진행하고 있습니다.',
+      individualContribution: '게임 UI 디자인, 아이콘 디자인, 3D 에셋 모델링 담당',
+    },
+    visualGallery: dontGetCookedKoongyaVisualGallery,
+    projectAchievements: [],
+    developmentStatus: {
+      currentStatus: 'PROTOTYPE · IN DEVELOPMENT',
+      currentDescription:
+        '프로토타입을 제작한 상태이며, 현재 게임 시스템과 콘텐츠를 지속적으로 개발 및 개선하고 있습니다.',
+      upcomingMilestone: '인게임 UI, 아이콘, 3D 에셋 및 프로토타입 플레이 영상 순차 공개 예정',
+      roadmap: [],
+    },
+    process: [],
+    deliverables: [],
+    reflection: {
+      problemSolved: '',
+      learnings: '',
+      futureImprovements: '',
     },
   },
 ];

@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 
 interface ProjectContributionCardProps {
   contributionRate?: number | null;
+  emptyLabel?: string;
 }
 
 export const normalizeContributionRate = (
@@ -16,6 +17,7 @@ export const normalizeContributionRate = (
 
 export const ProjectContributionCard: React.FC<ProjectContributionCardProps> = ({
   contributionRate,
+  emptyLabel = '미입력',
 }) => {
   const normalizedRate = normalizeContributionRate(contributionRate);
   const hasValue = normalizedRate !== null;
@@ -33,7 +35,7 @@ export const ProjectContributionCard: React.FC<ProjectContributionCardProps> = (
           </span>
         ) : (
           <span className="text-lg sm:text-xl font-bold text-[#6E7380] font-sans">
-            미입력
+            {emptyLabel}
           </span>
         )}
       </div>

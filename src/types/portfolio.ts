@@ -79,11 +79,22 @@ export interface TeamMemberRole {
   isSelf?: boolean;
 }
 
+export interface PrototypeVideoItem {
+  id: string;
+  code: string;
+  title: string;
+  roleLabel: string;
+  description: string;
+  youtubeUrl?: string;
+  caption?: string;
+}
+
 export interface ProjectVideo {
   src?: string; // Static MP4/WebM path (e.g. '/videos/off-the-record/gameplay.mp4')
   youtubeUrl?: string; // YouTube video URL
   poster?: string; // Optional poster image
   caption?: string; // Caption displayed below player
+  videos?: PrototypeVideoItem[]; // 프로젝트별 다중 영상 등록용 배열
 }
 
 export interface Project {
@@ -95,6 +106,8 @@ export interface Project {
   category: ProjectCategory;
   subCategory: string;
   genre?: string;
+  ip?: string;
+  developmentStage?: string;
   kicker: string;
   isFeatured?: boolean;
   status?: string;
@@ -105,6 +118,7 @@ export interface Project {
   team: string;
   teamMembers?: TeamMemberRole[];
   video?: ProjectVideo;
+  prototypeVideos?: PrototypeVideoItem[];
   externalLinks?: { label: string; url: string }[];
   roleScope: string;
   contributionRate?: number | null;

@@ -6,6 +6,7 @@ import { VRNursingArt } from './VRNursingArt';
 import { PangNyataArt } from './PangNyataArt';
 import { KoongyaRobloxArt } from './KoongyaRobloxArt';
 import { GrowTheBallArt } from './GrowTheBallArt';
+import { DontGetCookedKoongyaArt } from './DontGetCookedKoongyaArt';
 
 interface Props {
   projectId: string;
@@ -19,6 +20,8 @@ export const ArtworkRenderer: React.FC<Props> = ({ projectId, variant = 'card', 
       return <OffTheRecordArt variant={variant} className={className} />;
     case 'koongya-roblox':
       return <KoongyaRobloxArt variant={variant} className={className} />;
+    case 'dont-get-cooked-koongya':
+      return <DontGetCookedKoongyaArt variant={variant} className={className} />;
     case 'grow-the-ball':
       return <GrowTheBallArt variant={variant} className={className} />;
     case 'feel-so-gut':

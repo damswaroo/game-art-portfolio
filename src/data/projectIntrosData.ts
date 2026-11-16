@@ -16,6 +16,8 @@ export const projectIntrosData: Record<string, string> = {
   'grow-the-ball': '작은 공으로 시작해 주변의 오브젝트를 흡수하며 점점 몸집을 키워나가는 성장형 아케이드 게임',
   'tales-unwritten':
     '웹캠으로 플레이어의 표정을 인식하고, 아이템이 요구하는 감정과 일치하면 수집할 수 있는 표정 인식 기반 인터랙티브 게임',
+  'dont-get-cooked-koongya':
+    '셰프의 추격을 피해 살아남거나 동료를 구출하는 쿵야 레스토랑즈 IP 기반 1:5 비대칭 서바이벌 게임',
 };
 
 export const normalizeProjectIntro = (text?: string): string => {

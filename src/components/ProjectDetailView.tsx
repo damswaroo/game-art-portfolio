@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { Project, VisualGalleryCategory } from '../types/portfolio';
 import { FadeUp } from './animations/ScrollReveal';
-import { ProjectVideoPlayer } from './ProjectVideoPlayer';
+import { ProjectVideoPlayer, PrototypeVideosPlayer } from './ProjectVideoPlayer';
 import { ProjectContributionCard } from './ProjectContributionCard';
 import { resolveAssetUrl } from '../utils/assetPath';
 import { getProjectIntro } from '../data/projectIntrosData';
@@ -72,10 +72,15 @@ export const ProjectDetailView: React.FC<Props> = ({
   const isKoongya = project.id === 'koongya-roblox';
   const isGrowTheBall = project.id === 'grow-the-ball';
   const isTalesUnwritten = project.id === 'tales-unwritten';
+  const isDontGetCookedKoongya = project.id === 'dont-get-cooked-koongya';
 
+  const hasPrototypeVideos = Boolean(
+    project.prototypeVideos && project.prototypeVideos.length > 0
+  );
   const shouldRenderVideo =
-    project.category === 'Game Art' ||
-    Boolean(project.video?.src?.trim() || project.video?.youtubeUrl?.trim());
+    !hasPrototypeVideos &&
+    (project.category === 'Game Art' ||
+      Boolean(project.video?.src?.trim() || project.video?.youtubeUrl?.trim()));
 
   // Visual Works Categories
   const visualCategories: VisualGalleryCategory[] = project.visualGallery || [];
@@ -222,11 +227,22 @@ export const ProjectDetailView: React.FC<Props> = ({
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#F5F4F0] font-['Space_Grotesk']">
                   {project.title}
                 </h1>
-                {project.status && (
+                {isDontGetCookedKoongya ? (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-[#17191E] text-[#F5F4F0] border border-[#F5F4F0]/40">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F5F4F0]/90" aria-hidden="true" />
+                      <span>PROTOTYPE</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-[#17191E] text-[#F5F4F0] border border-[#F5F4F0]/40">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F5F4F0]/90" aria-hidden="true" />
+                      <span>IN DEVELOPMENT</span>
+                    </span>
+                  </div>
+                ) : project.status ? (
                   <span className="px-3 py-1 rounded-md text-xs font-mono font-semibold bg-[#C5FA59]/10 text-[#C5FA59] border border-[#C5FA59]/30">
                     {project.status}
                   </span>
-                )}
+                ) : null}
               </div>
             </FadeUp>
 
@@ -254,26 +270,32 @@ export const ProjectDetailView: React.FC<Props> = ({
               </FadeUp>
             )}
 
-            {/* GENRE, PROGRAM & PLATFORM (등록된 경우) */}
-            {(project.genre || project.program || project.platform) && (
+            {/* GENRE, PROGRAM, PLATFORM & IP (등록된 경우) */}
+            {(project.genre || project.program || project.platform || project.ip) && (
               <FadeUp delay={0.22} distance={15} duration={0.7}>
                 <div className="pt-1 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono">
+                  {project.platform && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#C5FA59] font-bold">PLATFORM:</span>
+                      <span className="text-[#F5F4F0]">{project.platform}</span>
+                    </div>
+                  )}
                   {project.genre && (
                     <div className="flex items-center gap-2">
                       <span className="text-[#C5FA59] font-bold">GENRE:</span>
                       <span className="text-[#F5F4F0] font-sans">{project.genre}</span>
                     </div>
                   )}
+                  {project.ip && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#C5FA59] font-bold">IP:</span>
+                      <span className="text-[#F5F4F0] font-sans">{project.ip}</span>
+                    </div>
+                  )}
                   {project.program && (
                     <div className="flex items-center gap-2">
                       <span className="text-[#C5FA59] font-bold">PROGRAM:</span>
                       <span className="text-[#F5F4F0]">{project.program}</span>
-                    </div>
-                  )}
-                  {project.platform && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#C5FA59] font-bold">PLATFORM:</span>
-                      <span className="text-[#F5F4F0]">{project.platform}</span>
                     </div>
                   )}
                 </div>
@@ -301,6 +323,43 @@ export const ProjectDetailView: React.FC<Props> = ({
             )}
           </div>
 
+          {/* 상세 소개 및 개발 진행 상태 (프로토타입 개발 중 프로젝트 전용) */}
+          {isDontGetCookedKoongya && (
+            <FadeUp delay={0.23} distance={20} duration={0.75}>
+              <div className="p-6 sm:p-7 rounded-xl bg-[#17191E] border border-[#272B33] space-y-5">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#242833]">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#C5FA59] font-bold uppercase tracking-wider">
+                    <span>GAME OVERVIEW &amp; DEVELOPMENT STATUS</span>
+                  </div>
+                  {project.developmentStage && (
+                    <span className="text-xs font-mono text-[#F5F4F0] px-2.5 py-1 rounded bg-[#101114] border border-[#F5F4F0]/30">
+                      {project.developmentStage}
+                    </span>
+                  )}
+                </div>
+
+                <div className="space-y-3 text-sm sm:text-base text-[#D1D4DC] font-sans leading-relaxed break-keep">
+                  {project.overview.background.split('\n\n').map((paragraph, idx) => (
+                    <p key={idx}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+            </FadeUp>
+          )}
+
+          {/* 프로토타입 플레이 영상 (세로 1열 중앙 정렬, 최대 너비 900px) */}
+          {hasPrototypeVideos && project.prototypeVideos && (
+            <FadeUp delay={0.24} distance={20} duration={0.8}>
+              <div className="pt-2">
+                <PrototypeVideosPlayer
+                  videos={project.prototypeVideos}
+                  projectId={project.id}
+                  projectTitle={project.title}
+                />
+              </div>
+            </FadeUp>
+          )}
+
           {/* 게임플레이 / 트레일러 영상 (모든 게임 프로젝트에 공통 16:9 플레이어 & 영구 등록 UI 적용) */}
           {shouldRenderVideo && (
             <FadeUp delay={0.24} distance={20} duration={0.8}>
@@ -314,7 +373,7 @@ export const ProjectDetailView: React.FC<Props> = ({
             </FadeUp>
           )}
 
-          {/* 프로젝트 정보 카드 (2열 × 2행: 진행 기간, 팀 구성, 담당 역할, 도구/공모전) */}
+          {/* 프로젝트 정보 카드 (2열 × 2행: 진행 기간, 팀 구성, 담당 역할, 제작 도구 + 전체 기여도) */}
           <div className="pt-2">
             <FadeUp delay={0.28} distance={20} duration={0.8}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -323,9 +382,15 @@ export const ProjectDetailView: React.FC<Props> = ({
                   <span className="text-xs font-mono text-[#C5FA59] uppercase tracking-wider font-semibold">
                     진행 기간
                   </span>
-                  <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
-                    {project.period}
-                  </div>
+                  {project.period === '추후 입력' || project.period === '미입력' ? (
+                    <div className="text-base sm:text-lg font-bold text-[#6E7380] font-sans">
+                      {project.period}
+                    </div>
+                  ) : (
+                    <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
+                      {project.period}
+                    </div>
+                  )}
                 </div>
 
                 {/* Card 2: TEAM OR PLATFORM/GENRE */}
@@ -336,6 +401,10 @@ export const ProjectDetailView: React.FC<Props> = ({
                   {isKoongya ? (
                     <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
                       Roblox · 비대칭 술래잡기
+                    </div>
+                  ) : project.team === '추후 입력' || project.team === '미입력' ? (
+                    <div className="text-base sm:text-lg font-bold text-[#6E7380] font-sans">
+                      {project.team}
                     </div>
                   ) : project.team ? (
                     <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
@@ -363,24 +432,45 @@ export const ProjectDetailView: React.FC<Props> = ({
                 {/* Card 4: MY TOOLS OR CONTEST INFO */}
                 <div className="p-5 rounded-xl bg-[#17191E] border border-[#272B33] flex flex-col justify-between space-y-2">
                   <span className="text-xs font-mono text-[#C5FA59] uppercase tracking-wider font-semibold">
-                    {project.tools && project.tools.length > 0
+                    {isDontGetCookedKoongya || (project.tools && project.tools.length > 0)
                       ? '제작 도구'
                       : isKoongya
                       ? '관련 공모전'
                       : '진행 상태'}
                   </span>
-                  <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
-                    {project.tools && project.tools.length > 0
-                      ? project.tools.join(' · ')
-                      : isKoongya
-                      ? '넷마블 쿵야 IP 로블록스 공모전'
-                      : project.status || '—'}
-                  </div>
+                  {project.tools && project.tools.length > 0 ? (
+                    <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
+                      {project.tools.join(' · ')}
+                    </div>
+                  ) : isDontGetCookedKoongya ? (
+                    <div className="text-base sm:text-lg font-bold text-[#6E7380] font-sans">
+                      추후 입력
+                    </div>
+                  ) : (
+                    <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
+                      {isKoongya ? '넷마블 쿵야 IP 로블록스 공모전' : project.status || '—'}
+                    </div>
+                  )}
                 </div>
 
                 {/* Card 5 (Full Width): OVERALL PROJECT CONTRIBUTION (Game Projects Only) */}
                 {project.category === 'Game Art' && (
-                  <ProjectContributionCard contributionRate={project.contributionRate} />
+                  <ProjectContributionCard
+                    contributionRate={project.contributionRate}
+                    emptyLabel={isDontGetCookedKoongya ? '추후 입력' : '미입력'}
+                  />
+                )}
+
+                {/* Card 6 (Full Width): DEVELOPMENT STATUS (프로토타입 개발 중 프로젝트 전용) */}
+                {isDontGetCookedKoongya && project.developmentStage && (
+                  <div className="p-5 rounded-xl bg-[#17191E] border border-[#272B33] flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:col-span-2">
+                    <span className="text-xs font-mono text-[#C5FA59] uppercase tracking-wider font-semibold">
+                      개발 상태
+                    </span>
+                    <div className="text-base sm:text-lg font-semibold text-[#F5F4F0] font-sans">
+                      {project.developmentStage}
+                    </div>
+                  </div>
                 )}
               </div>
             </FadeUp>
@@ -1478,16 +1568,129 @@ export const ProjectDetailView: React.FC<Props> = ({
                           )}
                         </div>
                       )
-                    ) : (
-                      <div className="px-5 py-4 rounded-xl bg-[#14161C] border border-[#242833] flex items-center gap-3 text-xs sm:text-sm text-[#8E939E] font-sans">
-                        <ImageIcon className="w-4 h-4 text-[#C5FA59]/80 shrink-0" />
-                        <span>현재 {cat.title} 카테고리에 등록된 작업물이 없습니다.</span>
+                      ) : (
+                        <div className="px-5 py-4 rounded-xl bg-[#14161C] border border-[#242833] flex items-center gap-3 text-xs sm:text-sm text-[#8E939E] font-sans">
+                          <ImageIcon className="w-4 h-4 text-[#C5FA59]/80 shrink-0" />
+                          <span>현재 {cat.title} 카테고리에 등록된 작업물이 없습니다.</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+          ) : isDontGetCookedKoongya ? (
+            /* Don't get cooked, Koongya!: 작업물이 등록되면 스크롤 갤러리로 표시, 미등록 시 간결한 준비 중 안내 */
+            visibleCategories.length > 0 ? (
+              <div className="space-y-12 pt-2">
+                {visibleCategories.map((cat, idx) => {
+                  const images = getCategoryImages(cat);
+                  const categoryNumber = String(idx + 1).padStart(2, '0');
+                  const categoryTag = cat.categoryCode.includes('/')
+                    ? cat.categoryCode.split('/')[1].trim()
+                    : cat.categoryCode;
+
+                  return (
+                    <div
+                      key={cat.id}
+                      className={`space-y-6 ${idx > 0 ? 'pt-10 border-t border-[#24262B]' : ''}`}
+                    >
+                      <FadeUp delay={idx * 0.05} distance={15} duration={0.6}>
+                        <div className="space-y-2 text-left">
+                          <div className="flex flex-wrap items-baseline justify-between gap-3">
+                            <div className="flex flex-wrap items-baseline gap-2.5">
+                              <span className="text-sm font-mono font-bold text-[#C5FA59] tracking-wider">
+                                {categoryNumber}
+                              </span>
+                              <h3 className="text-xl sm:text-2xl font-bold text-[#F5F4F0] font-['Space_Grotesk'] tracking-tight">
+                                {cat.title}
+                              </h3>
+                              <span className="text-xs font-mono text-[#8E939E] uppercase tracking-widest">
+                                / {categoryTag}
+                              </span>
+                            </div>
+                            <span className="text-xs font-mono text-[#6E7380] shrink-0">
+                              {images.length} {images.length === 1 ? 'ITEM' : 'ITEMS'}
+                            </span>
+                          </div>
+                          <p className="text-sm text-[#A7AAB0] font-sans leading-relaxed break-keep">
+                            {cat.description}
+                          </p>
+                        </div>
+                      </FadeUp>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 items-stretch">
+                        {images.map((img, imgIdx) => (
+                          <FadeUp
+                            key={img.id || img.src || imgIdx}
+                            delay={0.04 * (imgIdx % 6)}
+                            distance={15}
+                            duration={0.6}
+                            className="w-full h-full flex"
+                          >
+                            <div
+                              onClick={() =>
+                                setActiveModal({ categoryId: cat.id, imageIndex: imgIdx })
+                              }
+                              className="group relative rounded-xl bg-[#17191E] border border-[#272B33] overflow-hidden hover:border-[#C5FA59]/70 transition-all duration-300 cursor-pointer shadow-md hover:shadow-[#C5FA59]/10 flex flex-col w-full"
+                            >
+                              <div className="relative w-full aspect-[16/9] p-1.5 sm:p-2 bg-[#0E1015] overflow-hidden flex items-center justify-center">
+                                {(() => {
+                                  const resolvedSrc = resolveAssetUrl(img.src);
+                                  return failedImages[resolvedSrc] ? (
+                                    <div className="flex flex-col items-center justify-center gap-2 text-center text-[#6E7380] px-3">
+                                      <ImageIcon className="w-6 h-6 text-[#3E434E]" />
+                                      <span className="text-[11px] font-mono break-keep">
+                                        {img.title || img.alt || cat.title}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    <img
+                                      src={resolvedSrc}
+                                      alt={img.alt || img.title || `${cat.title} ${imgIdx + 1}`}
+                                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                                      loading={isGifSource(resolvedSrc) ? 'eager' : 'lazy'}
+                                      onError={() => markImageFailed(resolvedSrc)}
+                                    />
+                                  );
+                                })()}
+                                <div className="absolute inset-0 bg-[#C5FA59]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                                <div className="absolute bottom-3 right-3 z-10 p-1.5 rounded-lg bg-[#101114]/85 text-[#C5FA59] border border-[#2D313B] opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-1 group-hover:translate-y-0 shadow-md">
+                                  <Maximize2 className="w-4 h-4" />
+                                </div>
+                              </div>
+
+                              {(img.title || img.description || img.caption) && (
+                                <div className="p-3 sm:p-3.5 flex-1 flex items-center justify-center text-center bg-[#17191E] border-t border-[#242833]">
+                                  {img.title && (
+                                    <h4 className="text-xs sm:text-[13px] leading-snug font-bold text-[#F5F4F0] font-sans group-hover:text-[#C5FA59] transition-colors break-keep [overflow-wrap:anywhere]">
+                                      {img.title}
+                                    </h4>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </FadeUp>
+                        ))}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="py-10 px-6 rounded-2xl bg-[#14161C] border border-dashed border-[#282C36] text-center space-y-3">
+                <div className="w-10 h-10 mx-auto rounded-full bg-[#17191E] border border-[#262A34] flex items-center justify-center text-[#F5F4F0]">
+                  <ImageIcon className="w-5 h-5 text-[#C5FA59]" />
+                </div>
+                <div className="space-y-1.5 max-w-lg mx-auto">
+                  <p className="text-sm sm:text-base font-semibold text-[#F5F4F0] font-['Space_Grotesk']">
+                    비주얼 작업물 갤러리 준비 중
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#8E939E] leading-relaxed break-keep font-sans">
+                    현재 프로토타입 개발 단계로, 완성된 게임 UI · 아이콘 · 3D 에셋 디자인 작업물은 개발 진행에 맞춰 순차적으로 업데이트될 예정입니다.
+                  </p>
+                </div>
+              </div>
+            )
           ) : visualCategories.length > 0 ? (
             /* INTERACTIVE CATEGORY GALLERY (기타 프로젝트 폴백) */
             <div className="space-y-6 pt-2">
@@ -1675,7 +1878,8 @@ export const ProjectDetailView: React.FC<Props> = ({
           ) : null}
         </section>
 
-        {/* 03. RESULTS — 수상 및 공모전 성과 */}
+        {/* 03. RESULTS — 수상 및 공모전 성과 (등록된 성과가 있는 프로젝트에만 표시) */}
+        {project.projectAchievements && project.projectAchievements.length > 0 && (
         <section className="space-y-8 border-t border-[#24262B] pt-16">
           <FadeUp distance={20} duration={0.7}>
             <div className="flex items-center gap-3">
@@ -1785,6 +1989,7 @@ export const ProjectDetailView: React.FC<Props> = ({
             ))}
           </div>
         </section>
+        )}
 
         {/* Prev / Next Project Navigation Bar */}
         <FadeUp distance={20} duration={0.7}>
