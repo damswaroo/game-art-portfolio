@@ -38,14 +38,14 @@ export const growTheBallCharacterVisuals: VisualGalleryCategory['images'] = [
     src: resolveAssetUrl('/images/공좀키워오게/종이학생_캐릭터시트.png'),
     title: '종이 학생 캐릭터',
     alt: '공 좀 키워오게 종이 학생 캐릭터 시트',
-    imageClassName: 'scale-[1.02] translate-y-[2%] group-hover:scale-[1.05]',
+    imageClassName: 'scale-[1.02] translate-y-[2%] group-hover:scale-[1.045]',
   },
   {
     id: 'gtb-char-stamp-professor',
     src: resolveAssetUrl('/images/공좀키워오게/도장교수_캐릭터시트.png'),
     title: '도장 교수 캐릭터',
     alt: '공 좀 키워오게 도장 교수 캐릭터 시트',
-    imageClassName: 'scale-[1.18] group-hover:scale-[1.22]',
+    imageClassName: 'scale-[1.22] group-hover:scale-[1.26]',
   },
 ];
 
@@ -91,9 +91,9 @@ export const growTheBallVisualGallery: VisualGalleryCategory[] = [
   },
   {
     id: 'result-ranking-screen',
-    categoryCode: '03 / RESULT SCREEN & RANKING SCREEN',
-    title: '결과 화면 및 랭킹 화면',
-    description: '플레이 결과 화면과 랭킹 UI 디자인 작업물',
+    categoryCode: '03 / RESULT SCREEN & OTHER UI',
+    title: '결과 화면 및 기타 UI',
+    description: '플레이 결과, 랭킹 및 게임 설정 UI 디자인 작업물',
     images: [
       {
         id: 'gtb-result-1',
@@ -112,6 +112,12 @@ export const growTheBallVisualGallery: VisualGalleryCategory[] = [
         src: resolveAssetUrl('/images/공좀키워오게/랭킹화면2.png'),
         title: '랭킹 화면 2 (학과 대항 순위)',
         alt: '공 좀 키워오게 이번 학기 MVP 학과 대항 랭킹 화면',
+      },
+      {
+        id: 'gtb-audio-settings',
+        src: resolveAssetUrl('/images/공좀키워오게/오디오설정화면.png'),
+        title: '오디오 설정 화면',
+        alt: '공 좀 키워오게 강의 소리 오디오 설정 화면',
       },
     ],
   },

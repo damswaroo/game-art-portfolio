@@ -1454,15 +1454,21 @@ export const ProjectDetailView: React.FC<Props> = ({
                           </div>
                         </div>
                       ) : cat.id === 'character-visuals' ? (
-                        <div className="flex flex-wrap justify-center gap-5 md:gap-6 items-stretch">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 items-stretch">
                           {images.map((img, imgIdx) =>
                             renderGrowTheBallCard(
                               img,
                               imgIdx,
-                              'w-full max-w-[400px] sm:max-w-none sm:w-[calc((100%_-_1.25rem)_/_2_-_0.5px)] md:w-[calc((100%_-_1.5rem)_/_2_-_0.5px)] lg:w-[calc((100%_-_3rem)_/_3_-_0.5px)]',
+                              'w-full h-full',
                               false,
                               'aspect-[16/9]'
                             )
+                          )}
+                        </div>
+                      ) : cat.id === 'result-ranking-screen' ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 items-stretch">
+                          {images.map((img, imgIdx) =>
+                            renderGrowTheBallCard(img, imgIdx, 'w-full h-full')
                           )}
                         </div>
                       ) : (
