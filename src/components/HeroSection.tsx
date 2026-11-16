@@ -22,14 +22,14 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'off-the-record',
     title: 'OFF THE RECORD',
-    imageSrc: '/images/오프더레코드_썸네일2.png',
-    positionClass: 'bg-[74%_center] sm:bg-[72%_center] md:bg-[68%_center]',
+    imageSrc: '/images/off-the-record/오프더레코드_슬라이드이미지.png',
+    positionClass: 'bg-[72%_10%] sm:bg-[72%_10%] md:bg-[70%_10%]',
   },
   {
     id: 'feel-so-gut',
     title: 'FEEL SO GUT!',
-    imageSrc: '/images/필쏘굿_썸네일.png',
-    positionClass: 'bg-[62%_center] sm:bg-[64%_center] md:bg-[60%_center]',
+    imageSrc: '/images/feel-so-gut/필쏘굿_슬라이드이미지-1.jpg',
+    positionClass: 'bg-[68%_15%] sm:bg-[68%_15%] md:bg-[66%_15%]',
   },
 ];
 
