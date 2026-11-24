@@ -264,10 +264,10 @@ export const projectsData: Project[] = [
       },
       {
         title: 'G-STAR 2026',
-        badge: '출품 확정 · 전시 준비 중',
+        badge: '출품 · 전시 완료',
         badgeType: 'CONFIRMED',
         description:
-          '2026년 11월 18일부터 22일까지 개최되는 G-STAR 2026 전시에 출품이 확정되어, 전시용 빌드와 프로모션 리소스를 고도화하고 있습니다.',
+          "2026년 11월 19일부터 22일까지 개최된 G-STAR 2026에 'Off The Record'를 출품하여 게임 전시 및 시연을 진행하였습니다.",
       },
     ],
     developmentStatus: {
