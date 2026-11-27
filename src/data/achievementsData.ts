@@ -22,6 +22,7 @@ export const initialAchievements: Achievement[] = [
     awardDivision: '팀 수상 (삼유스튜디오)',
     description:
       '프로젝트 ‘OFF THE RECORD’로 대학부 본선 진출, 전문가 멘토링 3회 및 본선 발표를 거쳐 우수상 수상',
+    articleUrl: 'https://www.ccnnews.co.kr/news/articleView.html?idxno=418455',
     proofs: [
       {
         src: resolveAssetUrl('/certificates/인디유_우수상.jpg'),
