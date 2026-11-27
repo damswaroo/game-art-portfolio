@@ -24,11 +24,11 @@ export const initialAchievements: Achievement[] = [
       '프로젝트 ‘OFF THE RECORD’로 대학부 본선 진출, 전문가 멘토링 3회 및 본선 발표를 거쳐 우수상 수상',
     proofs: [
       {
-        src: resolveAssetUrl('/certificates/인디유_우수상1.png'),
+        src: resolveAssetUrl('/certificates/인디유_우수상.jpg'),
         title:
-          '2026년 충청권 인디게임 공모전 인디유(indie·U) 본선심사 결과 공고 (대학부 우수상 3USTUDIO 선정)',
-        date: '2026',
-        alt: '2026년 충청권 인디게임 공모전 인디유 본선심사 결과 공고문 대학부 우수상 3USTUDIO 선정',
+          '2026년 충청권 인디게임 공모전 인디유(indie·U) 대학부 우수상 상장 (3USTUDIO)',
+        date: '2026.11.25',
+        alt: '2026년 충청권 인디게임 공모전 인디유(indie·U) 대학부 우수상 상장 - 오프 더 레코드 (3USTUDIO)',
       },
     ],
   },

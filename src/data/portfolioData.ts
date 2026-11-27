@@ -81,6 +81,7 @@ export const projectsData: Project[] = [
       { label: '2026 미래 게임잼 최우수상', type: 'award', date: '2026.09.13' },
       { label: 'INDIE-U 2026 · 대학부 우수상', type: 'award', date: '2026.11.25' },
       { label: 'G-STAR 2026 EXHIBITION', type: 'activity', date: '2026.11.18' },
+      { label: 'STOVE INDIE BOOST LAB 등록 예정', type: 'activity' },
     ],
     team: '3U STUDIO (삼유스튜디오) · 3인 개발팀',
     teamMembers: [
@@ -260,7 +261,7 @@ export const projectsData: Project[] = [
         badge: '대학부 우수상 수상',
         badgeType: 'SELECTED',
         description:
-          '프로젝트 ‘OFF THE RECORD’로 2026 충청권 인디게임 공모전(INDIE-U) 대학부 예선을 통과하여 본선에 진출하였습니다. 그 후, 전문가 멘토링을 통해 게임의 완성도를 높였으며, 본선 발표 및 최종 심사를 거쳐 대학부 우수상 수상이 확정되었습니다. 현재 시상식을 앞두고 있습니다.',
+          '프로젝트 ‘OFF THE RECORD’로 2026 충청권 인디게임 공모전(INDIE-U) 대학부 예선을 통과하여 본선에 진출하였습니다. 그 후, 전문가 멘토링을 통해 게임의 완성도를 높였으며, 본선 발표 및 최종 심사를 거쳐 대학부 우수상을 수상하였습니다.',
       },
       {
         title: 'G-STAR 2026',
